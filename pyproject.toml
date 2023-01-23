@@ -18,6 +18,9 @@ starcraft-hello = "starcraft:hello"
 
 [project.optional-dependencies]
 dev = [
+    "pytest==7.0.0",
+    "pytest-cov==4.0.0",
+    "pytest-mock==3.10.0",
 ]
 types = [
 ]
@@ -27,3 +30,20 @@ requires = [
     "setuptools==45.2.0",  # This is the version provided in apt with focal
 ]
 build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = "tests"
+xfail_strict = true
+addopts = [
+    "--cov",
+]
+
+[tool.coverage.run]
+branch = true
+omit = ["tests/**"]
+
+[tool.coverage.report]
+skip_empty = true
+fail_under = 80
+
