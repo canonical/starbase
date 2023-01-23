@@ -14,8 +14,9 @@ tab_width = 2
 [{*.py,*.pyi}]
 quote_type = double
 
-[{*.har,*.json}]
+[{*.har,*.json,*.json5}]
 indent_size = 2
+tab_width = 2
 
 [{*.yaml,*.yml}]
 indent_size = 2
