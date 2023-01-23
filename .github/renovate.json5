@@ -53,7 +53,7 @@
       // tox.ini can get updates too if we specify for each package.
       fileMatch: ["tox.ini"],
       matchStrings: [
-        "# renovate: datasource=(?<datasource>\\S+)\n\\s+(?<depName>.*?)==(?<currentValue>.*?)\\n"
+        "# renovate: datasource=(?<datasource>\\S+)\n\\s+(?<depName>.*?)[=><]=?(?<currentValue>.*?)\\n",
       ]
     }
   ],
