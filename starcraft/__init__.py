@@ -1,6 +1,4 @@
-# This file is part of <name the program's name and a brief idea (one line)
-# of what it does (if you name the program here, you may change "This
-# program" below to the name)>
+# This file is part of starcraft.
 #
 # Copyright 2023 Canonical Ltd.
 #
