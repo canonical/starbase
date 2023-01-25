@@ -31,7 +31,7 @@ jobs:
           python -m pip install 'tox>=4' tox-gh
           echo "::endgroup::"
           echo "::group::Create virtual environments for linting processes."
-          tox run-parallel --parallel all --parallel-no-spinner -m lint --notest
+          tox run -m lint --notest
           echo "::endgroup::"
           echo "::group::Wait for snap to complete"
           snap watch --last=install
@@ -64,8 +64,7 @@ jobs:
           mkdir -p results
       - name: Setup Tox environments
         run: >
-          tox run-parallel --parallel auto --parallel-no-spinner 
-          --parallel-live -m tests --notest
+          tox run -m tests --notest
       - name: Test with tox
         run: > 
           tox run-parallel --parallel all --parallel-no-spinner 
