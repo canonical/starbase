@@ -28,6 +28,7 @@ types = [
 [build-system]
 requires = [
     "setuptools==66.1.1",
+    "build==0.10.0"
 ]
 build-backend = "setuptools.build_meta"
 

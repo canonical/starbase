@@ -1,0 +1,91 @@
+name: Release
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: write
+
+jobs:
+  source-wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          check-latest: true
+      - name: Build packages
+        run: |
+          pip install build twine
+          python3 -m build
+          twine check dist/*
+      - name: Upload pypi packages artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pypi-packages
+          path: dist
+  pypi:
+    needs: source-wheel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get packages
+        uses: actions/download-artifact@v3
+        with:
+          name: pypi-packages
+      - name: Publish to pypi
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+  snap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if snappable
+        id: check_snapcraft_yaml_exists
+        run: |
+          if [[ -e snap/snapcraft.yaml ]]; then
+            echo "snap=true" >> $GITHUB_OUTPUT
+            echo "Snapcraft file exists... creating snap."
+          else
+            echo "Snapcraft file does not exist. Not creating snap."
+          fi
+      - name: Checkout
+        if: ${{ steps.check_snapcraft_yaml_exists.outputs.snap }}
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Build snap
+        if: ${{ steps.check_snapcraft_yaml_exists.outputs.snap }}
+        uses: snapcore/action-build@v1
+        id: snapcraft
+      - name: Upload snap artifact
+        if: ${{ steps.check_snapcraft_yaml_exists.outputs.snap }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: snap-package
+          path: ${{ steps.snapcraft.outputs.snap }}
+      - name: Publish snap
+        if: ${{ steps.check_snapcraft_yaml_exists.outputs.snap }}
+        uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS = ${{ secrets.STORE_LOGIN }}
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          release: edge
+  github-release:
+    needs: ["source-wheel", "snap"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get pypi artifacts
+        uses: actions/download-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            **
