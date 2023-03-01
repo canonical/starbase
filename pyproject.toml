@@ -18,29 +18,45 @@ starcraft-hello = "starcraft:hello"
 
 [project.optional-dependencies]
 dev = [
-    "pytest==7.0.0",
+    "coverage[toml]==7.2.1",
+    "pytest==7.2.1",
     "pytest-cov==4.0.0",
     "pytest-mock==3.10.0",
 ]
 types = [
 ]
+docs = [
+    "furo==2022.12.07",
+    "sphinx==5.3.0",
+    "sphinx-autobuild==2021.3.14",
+    "sphinx-copybutton==0.5.1",
+    "sphinx-design==0.3.0",
+    "sphinx-pydantic==0.1.1",
+    "sphinx-toolbox==3.4.0",
+    "sphinx-lint==0.6.7",
+]
 
 [build-system]
 requires = [
-    "setuptools==66.1.1",
+    "setuptools==67.4.0",
     "build==0.10.0"
 ]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["starcraft"]
+[tool.setuptools.packages.find]
+exclude = [
+    "dist",
+    "docs",
+    "results",
+    "tests",
+]
 
 [tool.black]
 target-version = ["py38"]
 
 [tool.codespell]
 ignore-words-list = "buildd,crate,keyserver,comandos,ro,dedent,dedented"
-skip = ".tox,.git,build,.*_cache,__pycache__,*.tar,*.snap,*.png,node_modules"
+skip = ".tox,.git,build,.*_cache,__pycache__,*.tar,*.snap,*.png,./node_modules,./docs/_build,.direnv,.venv,venv,.vscode"
 quiet-level = 3
 check-filenames = true
 
@@ -56,12 +72,10 @@ line_length = 88
 minversion = "7.0"
 testpaths = "tests"
 xfail_strict = true
-addopts = [
-    "--cov",
-]
 
 [tool.coverage.run]
 branch = true
+parallel = true
 omit = ["tests/**"]
 
 [tool.coverage.report]
@@ -74,6 +88,31 @@ pythonVersion = "3.8"
 pythonPlatform = "Linux"
 venvPath = ".tox"
 venv = "py38"
+
+[tool.mypy]
+python_version = "3.8"
+exclude = [
+    "build",
+    "tests",
+    "results",
+]
+warn_unused_configs = true
+warn_redundant_casts = true
+strict_equality = true
+strict_concatenate = true
+warn_return_any = true
+disallow_subclassing_any = true
+disallow_untyped_decorators = true
+disallow_any_generics = true
+
+[[tool.mypy.overrides]]
+module = ["starcraft"]
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+strict = false
 
 [tool.ruff]
 line-length = 88
@@ -104,7 +143,8 @@ select = [  # Base linting rule selections.
     "ISC",  # Implicit string concatenation that can cause subtle issues
     "ICN",  # Only use common conventions for import aliases.
     "Q",  # Consistent quotations
-    "RET"  # Simpler logic after return, raise, continue or break
+    "RET",  # Simpler logic after return, raise, continue or break
+    "UP018", "C408",  # Convert type calls to literals. The latest pylint enforces this, but ruff has auto-fixes.
 ]
 extend-select = [
     # These sets are still frequently getting new rules.
@@ -151,6 +191,7 @@ ignore = [
     "S101",  # Allow assertions in tests
     "S103", # Allow `os.chmod` setting a permissive mask `0o555` on file or directory
     "S108", # Allow Probable insecure usage of temporary file or directory
+    "PLR0913",  # Allow many arguments for test functions
 ]
 # isort leaves init files alone by default, this makes ruff ignore them too.
 "__init__.py" = ["I001"]
