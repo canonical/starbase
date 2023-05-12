@@ -179,7 +179,7 @@ extend-select = [
     "S701",  # jinja2 templates without autoescape
     "RUF001", "RUF002", "RUF003",  # Ambiguous unicode characters
     "RUF005",  # Encourages unpacking rather than concatenation
-    "RUF008",  # Do not use mutable default values for dataclass attributes
+    # "RUF008",  # Do not use mutable default values for dataclass attributes - commented out temporarily until we can upgrade ruff
     "RUF100",  # #noqa directive that doesn't flag anything.
 ]
 ignore = [
