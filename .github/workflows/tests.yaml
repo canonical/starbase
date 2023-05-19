@@ -38,6 +38,10 @@ jobs:
           echo "::endgroup::"
       - name: Run Linters
         run: tox run -m lint
+      - name: Lint inclusive naming
+        uses: canonical-web-and-design/inclusive-naming@main
+        with:
+          fail-on-error: true
   tests:
     strategy:
       matrix:
