@@ -16,6 +16,7 @@ We use a large number of tools for our project. Most of these are installed for 
 - tox_ version 4 or later. (3.8+ will automatically provision a v4 virtualenv)
 - Pyright_ (it's recommended you install with ``snap install --classic pyright``)
 - ShellCheck_  (also available via snap: ``snap install shellcheck``)
+- pre-commit_
 
 Once you have all of those installed, you can install the necessary virtual environments for this repository using tox.
 
@@ -68,6 +69,7 @@ Running ``tox run -m format`` and ``tox run -m lint`` before committing code is 
 .. _`Canonical contributor licence agreement`: http://www.ubuntu.com/legal/contributors/
 .. _deadsnakes: https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
 .. _`git submodules`: https://git-scm.com/book/en/v2/Git-Tools-Submodules#_cloning_submodules
+.. _pre-commit: https://pre-commit.com/
 .. _pyproject.toml: ./pyproject.toml
 .. _Pyright: https://github.com/microsoft/pyright
 .. _pytest: https://pytest.org
