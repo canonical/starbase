@@ -45,7 +45,7 @@ If you'd like to run the tests with a newer version of Python, you can pass a sp
 
     tox -e test-py310
 
-While use of pre-commit_ is optional, it is highly encouraged, as it provides several automatic fixes for files, including automatic code formatting with ``black`` and ``ruff``.  The versions available in ``apt`` from Debian 11 (bullseye), Ubuntu 22.04 (jammy) and newer are sufficient, but you can also install the latest with ``pip install pre-commit``. Once you've installed it, run ``pre-commit install`` in this git repository to install the pre-commit hooks.
+While the use of pre-commit_ is optional, it is highly encouraged, as it runs automatic fixes for files when `git commit` is called, including code formatting with ``black`` and ``ruff``.  The versions available in ``apt`` from Debian 11 (bullseye), Ubuntu 22.04 (jammy) and newer are sufficient, but you can also install the latest with ``pip install pre-commit``. Once you've installed it, run ``pre-commit install`` in this git repository to install the pre-commit hooks.
 
 Tox environments and labels
 ###########################
