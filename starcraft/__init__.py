@@ -14,15 +14,17 @@
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 """Starcraft package demo."""
-from importlib.metadata import version
 from typing import List, Optional, Any
 
-__version__ = version(__name__)
+try:
+    from ._version import __version__
+except ImportError:
+    try:
+        from importlib.metadata import version, PackageNotFoundError
+        __version__ = version("starcraft")
+    except PackageNotFoundError:
+        __version__ = "dev"
 
-
-def hello(people: Optional[List[Any]] = None) -> None:
-    """Says hello."""
-    print("Hello *craft team!")
-    if people:
-        for person in people:
-            print(f"Hello {person}!")
+__all__ = [
+    "__version__",
+]
