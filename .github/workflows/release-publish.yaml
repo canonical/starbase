@@ -5,8 +5,6 @@ on:
       # These tags should be protected, remember to enable the rule:
       # https://github.com/canonical/starbase/settings/tag_protection
       - "[0-9]+.[0-9]+.[0-9]+"
-      # https://github.com/canonical/starbase/settings/tag_protection
-      - "[0-9]+.[0-9]+.[0-9]+"
 
 permissions:
   contents: write
@@ -36,7 +34,7 @@ jobs:
           name: pypi-packages
           path: dist/
   pypi:
-    needs: source-wheel
+    needs: ["source-wheel"]
     runs-on: ubuntu-latest
     steps:
       - name: Get packages
