@@ -66,7 +66,7 @@ jobs:
       - name: Setup Tox environments
         run: tox run -m tests --notest
       - name: Test with tox
-        run: .tox/.tox/bin/tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m unit-tests
+        run: tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m unit-tests
         env:
           PYTEST_ADDOPTS: "--no-header -vv -rN"
       - name: Upload code coverage
@@ -107,7 +107,7 @@ jobs:
       - name: Setup Tox environments
         run: tox run -m tests --notest
       - name: Test with tox
-        run: .tox/.tox/bin/tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m integration-tests
+        run: tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m integration-tests
         env:
           PYTEST_ADDOPTS: "--no-header -vv -rN"
       - name: Upload test results
