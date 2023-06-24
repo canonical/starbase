@@ -72,8 +72,8 @@ We group tox environments with the following labels:
 * ``format``: Runs all code formatters with auto-fixing
 * ``type``: Runs all type checkers
 * ``lint``: Runs all linters (including type checkers)
-* ``unit-tests``: Runs unit tests in Python versions on supported Ubuntu LTS's + latest
-* ``integration-tests``: Same as above but for integration tests
+* ``unit-tests``: Runs unit tests in several supported Python versions
+* ``integration-tests``: Run integration tests in several Python versions
 * ``tests``: The union of ``unit-tests`` and ``integration-tests``
 
 For each of these, you can see which environments will be run with ``tox list``.
