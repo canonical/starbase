@@ -68,12 +68,16 @@ jobs:
       - name: Test with tox
         run: tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m unit-tests
         env:
-          PYTEST_ADDOPTS: "--no-header -vv -rN"
+          PYTEST_ADDOPTS: "--no-header -vv -rN --junit-xml={tox_root}/results/test-results-{env_name}.xml"
+      - name: Generate coverage
+        run:
+          tox run -e coverage -- xml -o results/coverage.xml
+          tox run -e coverage -- json -o results/coverage.json
       - name: Upload code coverage
         uses: codecov/codecov-action@v3
         with:
           directory: ./results/
-          files: coverage*.xml
+          files: coverage*
       - name: Upload test results
         if: success() || failure()
         uses: actions/upload-artifact@v3
@@ -109,7 +113,7 @@ jobs:
       - name: Test with tox
         run: tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m integration-tests
         env:
-          PYTEST_ADDOPTS: "--no-header -vv -rN"
+          PYTEST_ADDOPTS: "--no-header -vv -rN --junit-xml={tox_root}/results/test-results-{env_name}.xml"
       - name: Upload test results
         if: success() || failure()
         uses: actions/upload-artifact@v3

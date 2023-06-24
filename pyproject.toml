@@ -20,7 +20,6 @@ dev = [
     "build",
     "coverage[toml]==7.2.7",
     "pytest==7.3.2",
-    "pytest-cov==4.1.0",
     "pytest-mock==3.10.0",
 ]
 lint = [
@@ -99,7 +98,7 @@ xfail_strict = true
 [tool.coverage.run]
 branch = true
 parallel = true
-omit = ["tests/**"]
+source_pkgs = ["starcraft"]
 
 [tool.coverage.report]
 skip_empty = true
