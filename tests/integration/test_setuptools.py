@@ -14,10 +14,14 @@
 """Integration tests related to building the package."""
 import re
 import subprocess
+import sys
 from pathlib import Path
 from zipfile import ZipFile
 
+import pytest
 
+
+@pytest.mark.skipif(sys.platform == "win32")
 def test_packages(project_main_module, tmp_path, request):
     """Check wheel generation from our pyproject.toml"""
     root_dir = Path(request.config.rootdir)
