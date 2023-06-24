@@ -1,3 +1,4 @@
+name: test
 on:
   push:
     branches:
@@ -8,7 +9,7 @@ on:
   pull_request:
 
 jobs:
-  linters:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,7 +39,7 @@ jobs:
           echo "::endgroup::"
       - name: Run Linters
         run: tox run --skip-pkg-install --no-list-dependencies -m lint
-  unit-tests:
+  unit:
     strategy:
       matrix:
         platform: [ubuntu-20.04, ubuntu-22.04, windows-latest, macos-latest]
@@ -79,7 +80,7 @@ jobs:
         with:
           name: test-results-${{ matrix.platform }}
           path: results/
-  integration-tests:
+  integration:
     strategy:
       matrix:
         platform: [ubuntu-20.04, ubuntu-22.04, windows-latest, macos-latest]
