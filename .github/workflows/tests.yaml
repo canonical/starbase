@@ -120,3 +120,39 @@ jobs:
         with:
           name: test-results-${{ matrix.platform }}
           path: results/
+  integration:
+    strategy:
+      matrix:
+        platform: [ubuntu-20.04, ubuntu-22.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: |
+            3.8
+            3.10
+            3.11
+            3.12-dev
+          cache: 'pip'
+      - name: Configure environment
+        run: |
+          echo "::group::pip install"
+          python -m pip install tox
+          echo "::endgroup::"
+          mkdir -p results
+      - name: Setup Tox environments
+        run: tox run -m tests --notest
+      - name: Test with tox
+        run: tox run --skip-pkg-install --no-list-dependencies --result-json results/tox-${{ matrix.platform }}.json -m integration-tests
+        env:
+          PYTEST_ADDOPTS: "--no-header -vv -rN"
+      - name: Upload test results
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.platform }}
+          path: results/

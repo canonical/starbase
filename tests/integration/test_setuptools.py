@@ -28,7 +28,9 @@ def test_packages(project_main_module, tmp_path, request):
     """Check wheel generation from our pyproject.toml"""
     root_dir = Path(request.config.rootdir)
     out_dir = tmp_path
-    subprocess.check_call(["python3", "-m", "build", "--outdir", out_dir, root_dir])
+    subprocess.check_call(
+        [sys.executable, "-m", "build", "--outdir", out_dir, root_dir]
+    )
     wheels = list(tmp_path.glob("*.whl"))
     assert len(wheels) == 1
     wheel = wheels[0]
