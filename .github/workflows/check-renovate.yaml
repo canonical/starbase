@@ -28,6 +28,6 @@ jobs:
       - name: Check renovate config
         run: renovate-config-validator .github/renovate.json5
       - name: Renovate dry-run
-        run: renovate --dry-run
+        run: renovate --dry-run --autodiscover
         env:
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
