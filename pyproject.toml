@@ -201,7 +201,7 @@ select = [  # Base linting rule selections.
     "Q",  # Consistent quotations
     "RSE",  # Errors on pytest raises.
     "RET",  # Simpler logic after return, raise, continue or break
-    "SLF",  # Error when accessing private members
+    "SLF",  # Prevent accessing private class members.
     "SIM",  # Code simplification
     "TID",  # Tidy imports
     # The team have chosen to only use type-checking blocks when necessary to prevent circular imports.
@@ -242,6 +242,12 @@ ignore = [
     # Ignored due to common usage in current code
     "TRY003",  # Avoid specifying long messages outside the exception class
 ]
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruf.lint.pylint]
+max-args = 8
 
 [tool.ruff.pep8-naming]
 # Allow Pydantic's `@validator` decorator to trigger class method treatment.
