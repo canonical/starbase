@@ -222,7 +222,6 @@ select = [  # Base linting rule selections.
     "RUF005",  # Encourages unpacking rather than concatenation
     "RUF008",  # Do not use mutable default values for dataclass attributes
     "RUF011",  # Don't use static keys in dict comprehensions.
-    "RUF012",  # Mutable class attributes should be annotated with typing.ClassVar
     "RUF013",  # Prohibit implicit Optionals (PEP 484)
     "RUF100",  # #noqa directive that doesn't flag anything
     "RUF200",  # If ruff fails to parse pyproject.toml...
