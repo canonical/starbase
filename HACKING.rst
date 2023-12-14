@@ -86,18 +86,129 @@ You can also see all the environments by simply running ``tox list``
 Running ``tox run -m format`` and ``tox run -m lint`` before committing code is
 recommended.
 
-Code Style
-==========
-
 Commits
-#######
+-------
 
-Format your commits following the conventional_ commit style.
+Commit messages are based on the `conventional commit`_ style::
 
-Optionally, use the parens to scope to a particular component where
-applicable.
+  <type>(<optional scope>): <description>
 
-See below for some examples of commit headings::
+  <optional body>
+
+  <optional footer>
+
+The commit is divided into three sections: a header, body, and footer.
+
+Header
+======
+
+The header is required and consists of three subsections: a type,
+optional scope, and description. The header must be 72 characters or less.
+
+Types
+#####
+
+``build``
+"""""""""
+
+Commits that affect the build of an application or library.
+
+This includes dependency updates, which should use the ``deps`` scope
+(``build(deps):``).
+
+``chore``
+"""""""""
+
+Miscellaneous commits that don't fit into any other type.
+
+Examples include:
+
+* development dependency updates
+* edits to a comment or docstring
+* type changes
+* accommodating a developer-facing deprecation warning
+* many *small* fixes for an existing PR
+
+``ci``
+""""""
+
+Commits that affect the CI/CD pipeline.
+
+``docs``
+""""""""
+
+Commits that affect the contents of the documentation.
+
+Changes to how documentation is built should use the ``build`` type.
+
+Changes to how the documentation is built in the CI/CD pipeline should use
+the ``ci`` type.
+
+``feat``
+""""""""
+
+Commits that add a new feature for the user.
+
+``fix``
+"""""""
+
+Commits that fix a bug or regression.
+
+``perf``
+""""""""
+
+Commits that improve performance without changing the API or external behavior.
+
+``refactor``
+"""""""""""""
+
+Commits that refactor code.
+
+Using `Martin Fowler's definition`_, refactor means "*a change made
+to the internal structure of software to make it easier to understand and
+cheaper to modify without changing its observable behavior.*"
+
+``style``
+""""""""""
+
+Commits that change the syntax or format of the code. The meaning of the
+code should not change.
+
+This includes automatic changes from tools like ``black`` and ``ruff format``.
+
+
+``test``
+""""""""
+
+Commits that improve, add, or remove tests.
+
+Scope
+#####
+
+A scope is an optional part of the commit header.  It adds additional context
+by specifying what part of the codebase will be affected.
+
+It should be a tangible part of the codebase, like a directory, module, or
+class name.
+
+If a commit affects many areas of the codebase, the scope should be omitted;
+``many`` is not an accepted scope.
+
+Description
+###########
+
+The description is written in the imperative mood (present tense, second
+person). The description should complete the following sentence::
+
+  If applied, this commit will <description>.
+
+The description does not begin with capital letter (unless it's a proper
+noun) and does not end with puncuation mark.
+
+Examples
+########
+
+Examples of commit headings::
 
     feat: inherit context from services
     test: increase unit test stability
@@ -108,15 +219,31 @@ See below for some examples of commit headings::
     ci(snap): upload the snap artefacts to Github
     chore(deps): update go.mod dependencies
 
+Body
+====
 
-Recommended prefixes are: ``fix:``, ``feat:``, ``build:``, ``chore:``, ``ci:``,
-``docs:``, ``style:``, ``refactor:``, ``perf:`` and ``test:``
+The body is an optional section of the commit to provide more context.
+It should be succinct (no more than 3-4 sentences) and may reference relevant
+bugs and issues.
+
+Footer
+======
+
+The footer is an optional section of the commit message that can mention the
+signer and co-authors of the commit.
+
+Example footers::
+
+  Signed-off-by: <name> <<email>>
+  Co-authored-by: <name> <<email>>
 
 
 .. _Black: https://black.readthedocs.io
 .. _`Canonical contributor licence agreement`: http://www.ubuntu.com/legal/contributors/
+.. _`conventional commit`: https://www.conventionalcommits.org/en/v1.0.0/#summary
 .. _deadsnakes: https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
 .. _`git submodules`: https://git-scm.com/book/en/v2/Git-Tools-Submodules#_cloning_submodules
+.. _`Martin Fowler's definition`: https://refactoring.com/
 .. _pre-commit: https://pre-commit.com/
 .. _pyproject.toml: ./pyproject.toml
 .. _Pyright: https://github.com/microsoft/pyright
@@ -124,4 +251,3 @@ Recommended prefixes are: ``fix:``, ``feat:``, ``build:``, ``chore:``, ``ci:``,
 .. _ruff: https://github.com/charliermarsh/ruff
 .. _ShellCheck: https://www.shellcheck.net/
 .. _tox: https://tox.wiki
-.. _conventional: https://www.conventionalcommits.org/en/v1.0.0/#summary
