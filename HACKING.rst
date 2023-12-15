@@ -108,6 +108,11 @@ optional scope, and description. The header must be 72 characters or less.
 Types
 #####
 
+``ci``
+""""""
+
+Commits that affect the CI/CD pipeline.
+
 ``build``
 """""""""
 
@@ -115,34 +120,6 @@ Commits that affect the build of an application or library.
 
 This includes dependency updates, which should use the ``deps`` scope
 (``build(deps):``).
-
-``chore``
-"""""""""
-
-Miscellaneous commits that don't fit into any other type.
-
-Examples include:
-
-* development dependency updates
-* edits to a comment or docstring
-* type changes
-* accommodating a developer-facing deprecation warning
-* many *small* fixes for an existing PR
-
-``ci``
-""""""
-
-Commits that affect the CI/CD pipeline.
-
-``docs``
-""""""""
-
-Commits that affect the contents of the documentation.
-
-Changes to how documentation is built should use the ``build`` type.
-
-Changes to how the documentation is built in the CI/CD pipeline should use
-the ``ci`` type.
 
 ``feat``
 """"""""
@@ -171,16 +148,61 @@ cheaper to modify without changing its observable behavior.*"
 ``style``
 """"""""""
 
-Commits that change the syntax or format of the code. The meaning of the
-code should not change.
+Commits that change the syntax, format, or aesthics of any text the codebase.
+The meaning of the text should not change.
 
-This includes automatic changes from tools like ``black`` and ``ruff format``.
-
+Examples include:
+* automatic changes from tools like ``black`` and ``ruff format``
+* changes to documentation that don't affect the meaning
+* correcting a typo
 
 ``test``
 """"""""
 
 Commits that improve, add, or remove tests.
+
+``docs``
+""""""""
+
+Commits that affect the contents of the documentation.
+
+Changes to how documentation is built should use ``build(docs)::``.
+
+Changes to how the documentation is built in the CI/CD pipeline should use
+the ``ci(docs):``.
+
+``chore``
+"""""""""
+
+Miscellaneous commits that don't fit into any other type.
+
+Examples include:
+
+* edits to a comment or docstring
+* type changes
+* accommodating a developer-facing deprecation warning
+* many *small* fixes for an existing PR
+* merge commits (``chore(merge):``)
+
+Choosing the right type
+"""""""""""""""""""""""
+
+Sometimes, multiple types may be appropriate for a PR.
+
+This may signal that a commit is doing more than one thing and should be
+broken into multiple smaller commits. For example, a commit should not refactor
+code and fix a bug. This should be two separate commits.
+
+In other scenarios, multiple types could be appropriate because of the nature
+of the commit. This can happen with ``test`` and ``docs``, which can be used
+as types or scopes.
+
+For example, refactoring a test suite could have the header
+``test(project): reorganize tests`` or ``refactor(test): reorganize project
+tests``.
+
+The types above are ordered by descending priority. The first appropriate type
+should be preffered.
 
 Scope
 #####
