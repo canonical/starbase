@@ -202,7 +202,7 @@ For example, refactoring a test suite could have the header
 tests``.
 
 The types above are ordered by descending priority. The first appropriate type
-should be preffered.
+should be preferred.
 
 Scope
 #####
