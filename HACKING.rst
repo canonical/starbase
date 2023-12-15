@@ -197,12 +197,14 @@ In other scenarios, multiple types could be appropriate because of the nature
 of the commit. This can happen with ``test`` and ``docs``, which can be used
 as types or scopes.
 
-For example, refactoring a test suite could have the header
-``test(project): reorganize tests`` or ``refactor(test): reorganize project
-tests``.
-
 The types above are ordered by descending priority. The first appropriate type
-should be preferred.
+should be used.
+
+For example, refactoring a test suite could have the header
+``test(project): reorganize tests`` or
+``refactor(test): reorganize project tests``. ``refactor`` has a higher
+priority than ``test``, so the latter option is correct.
+
 
 Scope
 #####
