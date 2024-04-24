@@ -23,6 +23,7 @@ you with tox, but you'll need to install:
 - tox_ version 3.8 or later
 - ShellCheck_  (also available via snap: ``snap install shellcheck``)
 - Codespell_ (also available via snap: ``snap install codespell``)
+- ruff_ (also available via snap: ``snap install ruff``)
 
 Once you have all of those installed, you can install the necessary virtual
 environments for this repository using tox.
@@ -33,7 +34,6 @@ Some other tools we use for code quality include:
 
 - Black_ for code formatting
 - pytest_ for testing
-- ruff_ for linting (and some additional formatting)
 
 A complete list is kept in our pyproject.toml_ file in dev dependencies.
 
