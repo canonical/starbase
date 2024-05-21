@@ -147,8 +147,15 @@ extend-exclude = [
     "docs",
     "__pycache__",
 ]
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+quote-style = "double"
+
+[tool.ruff.lint]
 # Follow ST063 - Maintaining and updating linting specifications for updating these.
-lint.select = [  # Base linting rule selections.
+select = [  # Base linting rule selections.
     # See the internal document for discussion:
     # https://docs.google.com/document/d/1i1n8pDmFmWi4wTDpk-JfnWCVUThPJiggyPi2DYwBBu4/edit
     # All sections here are stable in ruff and shouldn't randomly introduce
@@ -221,7 +228,7 @@ lint.select = [  # Base linting rule selections.
     "RUF100",  # #noqa directive that doesn't flag anything
     "RUF200",  # If ruff fails to parse pyproject.toml...
 ]
-lint.ignore = [
+ignore = [
     "ANN10",  # Type annotations for `self` and `cls`
     #"E203",  # Whitespace before ":"  -- Commented because ruff doesn't currently check E203
     "E501",  # Line too long (reason: black will automatically fix this for us)
