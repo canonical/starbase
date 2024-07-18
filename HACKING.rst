@@ -167,7 +167,7 @@ Commits
 
 Commit messages are based on the `conventional commit`_ style::
 
-  <type>([optional scope])[!]: <description>
+  <type>[(optional scope)][!]: <description>
 
   [optional body]
 
