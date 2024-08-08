@@ -41,7 +41,7 @@
       // Update all internal packages in one higher-priority PR
       groupName: "internal packages",
       matchDepPatterns: ["craft-.*", "snap-.*"],
-      matchLanguages: ["python"],
+      matchCategories: ["python"],
       prPriority: 2,
       matchBaseBranches: ["$default"],  // Not for hotfix branches
     },
@@ -103,10 +103,11 @@
       matchBaseBranches: ["$default"],  // Not for hotfix branches
     }
   ],
-  regexManagers: [
+  customManagers: [
     {
       // tox.ini can get updates too if we specify for each package.
       fileMatch: ["tox.ini"],
+      customType: "regex",
       depTypeTemplate: "devDependencies",
       matchStrings: [
         "# renovate: datasource=(?<datasource>\\S+)\n\\s+(?<depName>.*?)(\\[[\\w]*\\])*[=><]=?(?<currentValue>.*?)\n"
@@ -115,6 +116,7 @@
     {
       // .pre-commit-config.yaml version updates
       fileMatch: [".pre-commit-config.yaml"],
+      customType: "regex",
       datasourceTemplate: "pypi",
       depTypeTemplate: "lint",
       matchStrings: [
@@ -129,7 +131,7 @@
   prCreation: "not-pending", // Wait until status checks have completed before raising the PR
   prNotPendingHours: 4, // ...unless the status checks have been running for 4+ hours.
   prHourlyLimit: 1, // No more than 1 PR per hour.
-  stabilityDays: 2, // Wait 2 days from release before updating.
+  minimumReleaseAge: "2 days",
   automergeStrategy: "squash", // Squash & rebase when auto-merging.
   semanticCommitType: "build"  // use `build` as commit header type (i.e. `build(deps): <description>`)
 }
