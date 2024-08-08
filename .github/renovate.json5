@@ -1,6 +1,6 @@
 {
   // Configuration file for RenovateBot: https://docs.renovatebot.com/configuration-options
-  extends: ["config:base"],
+  extends: ["config:recommended"],
   labels: ["dependencies"],  // For convenient searching in GitHub
   baseBranches: ["$default", "/^hotfix\\/.*/"],
   pip_requirements: {
