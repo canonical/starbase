@@ -67,6 +67,23 @@
         "lint/.*",
         "types/.*"
       ],
+      matchPackagePatterns: [
+        // Brought from charmcraft. May not be complete.
+        // This helps group dependencies in requirements-dev.txt files.
+        "^(.*/)?autoflake$",
+        "^(.*/)?black$",
+        "^(.*/)?flake8$",
+        "^(.*/)?hypothesis$",
+        "^(.*/)?pycodestyle$",
+        "^(.*/)?pyfakefs$",
+        "^(.*/)?pyflakes$",
+        "^(.*/)?pylint$",
+        "^(.*/)?pytest",
+        "^(.*/)?responses$",
+        "^(.*/)?ruff$",
+        "^(.*/)?twine$",
+        "^(.*/)?types-"
+      ],
       matchUpdateTypes: ["minor", "patch", "pin", "digest"],
       prPriority: -1,
       automerge: true
