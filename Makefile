@@ -23,7 +23,7 @@ else ifeq ($(OS),Windows_NT)
 	pipx install uv
 	choco install shellcheck
 else ifeq ($(OS),Darwin)
-	bash -c 'curl -LsSf https://astral.sh/uv/install.sh | sh'
+	brew install uv
 	brew install shellcheck
 endif
 ifneq ($(OS),Linux)
