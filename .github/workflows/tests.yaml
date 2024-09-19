@@ -34,7 +34,7 @@ jobs:
           sudo snap install --no-wait codespell shellcheck ruff
           echo "::endgroup::"
           echo "::group::pip install"
-          python -m pip install tox
+          python -m pip install -U tox
           echo "::endgroup::"
           echo "::group::Create virtual environments for linting processes."
           tox run --colored yes -m lint --notest
