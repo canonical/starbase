@@ -34,7 +34,7 @@ jobs:
       - name: Check renovate config
         run: renovate-config-validator .github/renovate.json5
       - name: Renovate dry-run
-        run: renovate --dry-run --autodiscover
+        run: renovate --dry-run --autodiscover --print-config
         env:
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RENOVATE_USE_BASE_BRANCH_CONFIG: ${{ github.ref }}
