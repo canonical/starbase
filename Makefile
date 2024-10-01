@@ -12,9 +12,6 @@ endif
 
 .SHELLFLAGS = -ec
 
-# Support out-of-tree make operations
-CRAFTDIR := $(patsubst %/,%,$(dir $(realpath $(firstword $(MAKEFILE_LIST)))))
-
 .PHONY: help
 help: ## Show this help.
 	@printf "%-41s %s\n" "Target" "Description"
