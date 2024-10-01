@@ -12,6 +12,11 @@ endif
 
 .SHELLFLAGS = -ec
 
+VENV = ./venv
+
+UV_PROJECT_ENVIRONMENT := $(VENV)
+export UV_PROJECT_ENVIRONMENT
+
 .PHONY: help
 help: ## Show this help.
 	@printf "%-41s %s\n" "Target" "Description"
