@@ -6,16 +6,43 @@ ifneq ($(OS),Windows_NT)
 	OS := $(shell uname)
 endif
 
+.DEFAULT_GOAL := help
+
+.ONESHELL:
+
+.SHELLFLAGS = -ec
+
+# Support out-of-tree make operations
+CRAFTDIR := $(patsubst %/,%,$(dir $(realpath $(firstword $(MAKEFILE_LIST)))))
+
 .PHONY: help
 help: ## Show this help.
-	@printf "%-30s %s\n" "Target" "Description"
-	@printf "%-30s %s\n" "------" "-----------"
-	@fgrep " ## " $(MAKEFILE_LIST) | fgrep -v grep | awk -F ': .*## ' '{$$1 = sprintf("%-30s", $$1)} 1'
+	@printf "%-41s %s\n" "Target" "Description"
+	@printf "%-41s %s\n" "------" "-----------"
+	@fgrep " ##" $(MAKEFILE_LIST) | fgrep -v grep | sed 's/:[^#]*/ /' | awk -F '[: ]*' \
+	'{
+		if ($$2 == "##")
+		{
+			$$1=sprintf("%-40s", $$1);
+			$$2="";
+			print $$0;
+		}
+		else
+		{
+			$$1=sprintf(" └%-38s", $$1);
+			$$2="";
+			print $$0;
+		}
+	}'
+
+---------------- : ## ----------------
 
 .PHONY: setup
 setup: ## Set up a development environment
 ifeq ($(OS),Linux)
-	sudo snap install codespell ruff shellcheck
+	sudo snap install codespell
+	sudo snap install ruff
+	sudo snap install shellcheck
 	sudo snap install --classic --beta astral-uv
 	sudo snap alias astral-uv.uv uv
 	sudo snap alias astral-uv.uvx uvx
@@ -39,68 +66,73 @@ ifeq (, $(shell which pre-commit))
 endif
 	pre-commit install
 
+---------------- : ## ----------------
+
 .PHONY: autoformat
 autoformat: format-ruff format-codespell  ## Run all automatic formatters
+
+.PHONY: format-ruff
+format-ruff:  ##- Automatically format with ruff
+	ruff format $(SOURCES)
+	ruff check --fix $(SOURCES)
+
+.PHONY: format-codespell
+format-codespell:  ##- Fix spelling issues with codespell
+	uv run codespell --toml pyproject.toml --write-changes $(SOURCES)
+
+---------------- : ## ----------------
 
 .PHONY: lint
 lint: lint-ruff lint-codespell lint-mypy lint-pyright lint-shellcheck lint-yaml lint-docs  ## Run all linters
 
+.PHONY: lint-ruff
+lint-ruff:  ##- Lint with ruff
+	ruff format --diff $(SOURCES)
+	ruff check $(SOURCES)
+
+.PHONY: lint-codespell
+lint-codespell:  ##- Check spelling with codespell
+	uv run codespell --toml pyproject.toml $(SOURCES)
+
+.PHONY: lint-mypy
+lint-mypy:  ##- Check types with mypy
+	uv run mypy --show-traceback --show-error-codes $(SOURCES)
+
+.PHONY: lint-pyright
+lint-pyright:  ##- Check types with pyright
+	uv run pyright
+
+.PHONY: lint-shellcheck
+lint-shellcheck:  ##- Lint shell scripts
+	git ls-files | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shellcheck
+
+.PHONY: lint-yaml
+lint-yaml:  ##- Lint YAML files with yamllint
+	uv run yamllint .
+
+.PHONY: lint-docs
+lint-docs:  ##- Lint the documentation
+	uv run --extra docs sphinx-lint --max-line-length 80 --enable all $(DOCS)
+
+---------------- : ## ----------------
+
 .PHONY: test
 test: test-unit test-integration  ## Run all tests
 
+.PHONY: test-unit
+test-unit:  ##- Run unit tests
+	uv run pytest --cov=$(PROJECT) --cov-config=pyproject.toml --cov-report=xml:.coverage.unit.xml --junit-xml=.results.unit.xml tests/unit
+
+.PHONY: test-integration
+test-integration:  ##- Run integration tests
+	uv run pytest --cov=$(PROJECT) --cov-config=pyproject.toml --cov-report=xml:.coverage.integration.xml --junit-xml=.results.integration.xml tests/integration
+
+---------------- : ## ----------------
+
 .PHONY: docs
-docs: ## Build documentation
+docs:  ## Build documentation
 	uv run --extra docs sphinx-build -b html -W docs docs/_build
 
 .PHONY: docs-auto
 docs-auto:  ## Build and host docs with sphinx-autobuild
 	uv run --extra docs sphinx-autobuild -b html --open-browser --port=8080 --watch $(PROJECT) -W docs docs/_build
-
-# Helpful in `help` to split the main targets from things that build
----------------- : ## ----------------
-
-.PHONY: format-codespell
-format-codespell:  ## Fix spelling issues with codespell
-	uv run codespell --toml pyproject.toml --write-changes $(SOURCES)
-
-.PHONY: format-ruff
-format-ruff:  ## Automatically format with ruff
-	ruff format $(SOURCES)
-	ruff check --fix $(SOURCES)
-
-.PHONY: lint-codespell
-lint-codespell: ## Check spelling with codespell
-	uv run codespell --toml pyproject.toml $(SOURCES)
-
-.PHONY: lint-docs
-lint-docs:  ## Lint the documentation
-	uv run --extra docs sphinx-lint --max-line-length 80 --enable all $(DOCS)
-
-.PHONY: lint-mypy
-lint-mypy: ## Check types with mypy
-	uv run mypy $(SOURCES)
-
-.PHONY: lint-pyright
-lint-pyright: ## Check types with pyright
-	uv run pyright
-
-.PHONY: lint-ruff
-lint-ruff:  ## Lint with ruff
-	ruff format --diff $(SOURCES)
-	ruff check $(SOURCES)
-
-.PHONY: lint-shellcheck
-lint-shellcheck:
-	sh -c 'git ls-files | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shellcheck'
-
-.PHONY: lint-yaml
-lint-yaml:  ## Lint YAML files with yamllint
-	uv run yamllint .
-
-.PHONY: test-unit
-test-unit: ## Run unit tests
-	uv run pytest --cov=$(PROJECT) --cov-config=pyproject.toml --cov-report=xml:.coverage.unit.xml --junit-xml=.results.unit.xml tests/unit
-
-.PHONY: test-integration
-test-integration:  ## Run integration tests
-	uv run pytest --cov=$(PROJECT) --cov-config=pyproject.toml --cov-report=xml:.coverage.integration.xml --junit-xml=.results.integration.xml tests/integration
