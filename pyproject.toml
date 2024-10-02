@@ -1,6 +1,6 @@
 [project]
 name = "starcraft"
-description = "The basis for Startcraft team packages"
+description = "The basis for Starcraft team packages"
 dynamic = ["version", "readme"]
 dependencies = [
 
@@ -38,9 +38,6 @@ docs = [
     "sphinx-pydantic==0.1.1",
     "sphinx-toolbox~=3.5",
     "sphinx-lint==1.0.0",
-]
-apt = [
-    "python-apt @ https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/python-apt/2.4.0ubuntu2/python-apt_2.4.0ubuntu2.tar.xz ; sys_platform == 'linux'"
 ]
 
 [tool.uv]
