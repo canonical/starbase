@@ -75,8 +75,8 @@ autoformat: format-ruff format-codespell  ## Run all automatic formatters
 
 .PHONY: format-ruff
 format-ruff:  ##- Automatically format with ruff
-	ruff format $(SOURCES)
 	ruff check --fix $(SOURCES)
+	ruff format $(SOURCES)
 
 .PHONY: format-codespell
 format-codespell:  ##- Fix spelling issues with codespell
@@ -89,8 +89,8 @@ lint: lint-ruff lint-codespell lint-mypy lint-pyright lint-shellcheck lint-yaml 
 
 .PHONY: lint-ruff
 lint-ruff:  ##- Lint with ruff
-	ruff format --diff $(SOURCES)
 	ruff check $(SOURCES)
+	ruff format --diff $(SOURCES)
 
 .PHONY: lint-codespell
 lint-codespell:  ##- Check spelling with codespell

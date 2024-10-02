@@ -16,26 +16,46 @@ TODO
 
 Migrate existing projects
 --------------------------------
+#. Use ruff.
+   #. Pull in the bare minimum ``pyproject.toml`` needed to use ruff.
+   #. Make your codebase pass with ruff.  Commit after each step:
+      #. ``ruff check --fix``
+      #. ``ruff check --fix --unsafe-fixes``
+      #. ``ruff check --add-noqa``
+      #. ``ruff format``
+   #. Replace use of black, flake8, pydocstyle, isort, and pylint in Makefile/CI
+      with:
+      - ``ruff check --fix``
+      - ``ruff format``
 #. Modify top-level files in your project to match what's in Starbase as closely
    as possible.
    #. ``Makefile`` - Ensure you use ``uv`` and at least have the same targets.
-   #. ``pyproject.toml`` - Move things into here from your ``setup.py``,
-      ``setup.cfg``, and ``requirements.*.txt``.
+   #. ``pyproject.toml`` - Expand from just the ruff things: move things into
+      here from your ``setup.py``, ``setup.cfg``, and ``requirements.*.txt``.
    #. ``README.md`` - If your readme is .rst, convert with pandoc:
       ``pandoc -o README.rst README.md``
       Don't worry about making the contents match, Starbase's is very specific.
-#. Make your codebase pass with ``ruff``.  Commit after each step:
-   #. ``ruff check --fix``
-   #. ``ruff check --fix --unsafe-fixes``
-   #. ``ruff check --add-noqa``
-   #. ``ruff format``
 #. Run all the linters: ``make lint``
-   #. ``mypy`` will probably give you problems, it checks the same things as
-      ``ruff``'s ``ANNXXX`` checks, but ``ruff``'s ``noqa`` directives mean
-      nothing to mypy.  You'll need to fix these by hand, mostly by adding type
-      annotations to function definitions.
-   #. ``pyright`` will probably give you problems.
-         ...
+   #. ``mypy``:
+      - Mypy checks the same things as ``ruff``'s ``ANNXXX`` checks, but
+        ``ruff``'s ``noqa`` directives mean nothing to mypy.  You'll need to fix
+        these by hand, mostly by adding type annotations to function definitions.
+   #. ``pyright``:
+      - For errors along the lines of "Stub file not found for $library", check
+        for the existence of pip package ``typing-$library`` and add it as a
+        dependency.
+      - If you have lots of errors you may need to remove the ``strict``
+        directive from ``pyproject.toml``.
+#. Do a side-by-side diff of the ``.gitignore`` files in your project and
+   Starbase, making them as close as possible and adding anything that makes
+   sense upstream.
+#. Bring in remaining top-level files:
+   - .editorconfig
+   - .pre-commit-config.yaml
+   - .shellcheckrc
+   - tox.ini
+   - .yamllint.yaml
+
 
 Create a new project
 ---------------------------
