@@ -126,6 +126,15 @@ test-integration:  ##- Run integration tests
 
 ---------------- : ## ----------------
 
+.PHONY: coverage
+coverage:  ## Generate coverage report
+	@coverage run --source starcraft -m pytest
+	coverage xml -o coverage.xml
+	coverage report -m
+	coverage html
+
+---------------- : ## ----------------
+
 .PHONY: docs
 docs:  ## Build documentation
 	uv run --extra docs sphinx-build -b html -W docs docs/_build
