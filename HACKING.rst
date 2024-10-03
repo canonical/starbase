@@ -260,7 +260,7 @@ Examples include:
 * many *small* fixes for an existing PR
 * merge commits (``chore(merge): <branch or tag> into <branch>``)
 
-  * the remote name should not be included (i.e. use ``main``
+  * the remote name should not be included (for example, use ``main``
     instead of ``origin/main``)
 
 Choosing the right type
