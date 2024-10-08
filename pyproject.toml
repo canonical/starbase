@@ -17,8 +17,25 @@ requires-python = ">=3.10"
 starcraft-hello = "starcraft:hello"
 
 [project.optional-dependencies]
+dev = [
+    "build",
+    "coverage[toml]~=7.4",
+    "pytest~=8.0",
+    "pytest-cov~=5.0",
+    "pytest-mock~=3.12",
+]
+lint = [
+    "yamllint~=1.34",
+]
+types = [
+    "mypy[reports]~=1.11.0",
+    "pyright==1.1.383",
+    "types-Pygments",
+    "types-colorama",
+    "types-setuptools",
+]
 docs = [
-    "canonical-sphinx~=0.1",
+    "canonical-sphinx~=0.2.0",
     "sphinx-autobuild~=2024.2",
     "sphinx-pydantic==0.1.1",
     "sphinx-toolbox~=3.5",
@@ -42,17 +59,7 @@ constraint-dependencies = [
     "webencodings>=0.4.0",
 ]
 dev-dependencies = [
-    "build>=1.2.1",
-    "coverage[toml]~=7.4",
-    "pytest~=8.0",
-    "pytest-cov~=5.0",
-    "pytest-mock~=3.12",
-    "yamllint~=1.34",
-    "mypy[reports]~=1.11.0",
-    "pyright==1.1.380",
-    "types-Pygments",
-    "types-colorama",
-    "types-setuptools",
+    "starcraft[dev,lint,types] @ /",   
 ]
 
 [build-system]
