@@ -32,7 +32,7 @@ Migrate existing projects
    #. ``Makefile`` - Ensure you use ``uv`` and at least have the same targets.
    #. ``pyproject.toml`` - Expand from just the ruff things: move things into
       here from your ``setup.py``, ``setup.cfg``, and ``requirements.*.txt``.
-   #. ``README.md`` - If your readme is .rst, convert with pandoc:
+   #. ``README`` - If your readme is .md, convert to .rst with pandoc:
       ``pandoc -o README.rst README.md``
       Don't worry about making the contents match, Starbase's is very specific.
 #. Run all the linters: ``make lint``
@@ -57,6 +57,13 @@ Migrate existing projects
    - .yamllint.yaml
 #. If you're rebasing a library, add the integrations tests structure.
    Applications should use spread for integration tests.
+# Finally, once all files are manually synced, actually sync the git history:
+   - ``git remote add starbase git@github.com:canonical/starbase.git``
+   - ``git merge --allow-unrelated-histories starbase/main``
+   - ``git remote remove starbase``
+   - Don't forget to review all the new files and dirs that this merge adds -
+     you'll want to delete a lot of them.
+
 
 
 Create a new project
