@@ -40,9 +40,7 @@ ifeq ($(OS),Linux)
 	sudo snap install codespell
 	sudo snap install ruff
 	sudo snap install shellcheck
-	sudo snap install --classic --beta astral-uv
-	sudo snap alias astral-uv.uv uv
-	sudo snap alias astral-uv.uvx uvx
+	sudo snap install --classic astral-uv
 else ifeq ($(OS),Windows_NT)
 	pipx install uv
 	choco install shellcheck
