@@ -146,6 +146,3 @@ dmypy.json
 
 # Visual Studio Code
 .vscode/
-
-# UV
-uv.lock
