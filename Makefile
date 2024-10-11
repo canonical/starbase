@@ -126,7 +126,7 @@ test-integration:  ##- Run integration tests
 
 .PHONY: coverage
 coverage:  ## Generate coverage report
-	@coverage run --source starcraft -m pytest
+	coverage run --source starcraft -m pytest
 	coverage xml -o coverage.xml
 	coverage report -m
 	coverage html
