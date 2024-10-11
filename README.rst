@@ -70,6 +70,8 @@ Migrate existing projects
    - ``git remote remove starbase``
    - Don't forget to review all the new files and dirs that this merge adds -
      you'll want to delete a lot of them.
+   - When you merge, DO NOT squash, otherwise the starbase history will not be
+     preserved.
 
 
 
