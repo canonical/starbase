@@ -16,6 +16,7 @@ TODO
 
 Migrate existing projects
 --------------------------------
+#. Update this guide as you go along, if something is unclear or missing.
 #. Use ruff.
    #. Pull in the bare minimum ``pyproject.toml`` needed to use ruff.
    #. Make your codebase pass with ruff.  Commit after each step:
@@ -29,7 +30,13 @@ Migrate existing projects
       - ``ruff format``
 #. Modify top-level files in your project to match what's in Starbase as closely
    as possible.
-   #. ``Makefile`` - Ensure you use ``uv`` and at least have the same targets.
+   #. ``Makefile`` - Ensure you use ``uv`` and at least have the same targets:
+      - ``setup``
+      - ``lint``
+      - ``test-unit``
+      - ``test-integration`` (If this applies to your repo, i.e. the repo is a library
+        rather than an application)
+      - ``coverage``
    #. ``pyproject.toml`` - Expand from just the ruff things: move things into
       here from your ``setup.py``, ``setup.cfg``, and ``requirements.*.txt``.
    #. ``README`` - If your readme is .md, convert to .rst with pandoc:
