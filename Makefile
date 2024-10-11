@@ -95,6 +95,8 @@ lint-mypy:  ##- Check types with mypy
 
 .PHONY: lint-pyright
 lint-pyright:  ##- Check types with pyright
+	# Fix for a bug in npm
+	[ -d "/home/ubuntu/.npm/_cacache" ] && chown -R 1000:1000 "/home/ubuntu/.npm" || true
 	uv run pyright
 
 .PHONY: lint-shellcheck
