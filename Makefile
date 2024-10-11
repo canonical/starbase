@@ -82,7 +82,7 @@ format-codespell:  ##- Fix spelling issues with codespell
 	uv run codespell --toml pyproject.toml --write-changes $(SOURCES)
 
 .PHONY: autoformat
-autoformat: format  ## Alias for 'format'
+autoformat: format  # Alias for 'format'
 
 ---------------- : ## ----------------
 
