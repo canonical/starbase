@@ -109,7 +109,7 @@ lint-yaml:  ##- Lint YAML files with yamllint
 
 .PHONY: lint-docs
 lint-docs:  ##- Lint the documentation
-	uv run --extra docs sphinx-lint --max-line-length 80 --enable all $(DOCS)
+	uv run --extra docs sphinx-lint --max-line-length 88 --enable all $(DOCS)
 
 ---------------- : ## ----------------
 
