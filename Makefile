@@ -66,8 +66,8 @@ endif
 
 ---------------- : ## ----------------
 
-.PHONY: autoformat
-autoformat: format-ruff format-codespell  ## Run all automatic formatters
+.PHONY: format
+format: format-ruff format-codespell  ## Run all automatic formatters
 
 .PHONY: format-ruff
 format-ruff:  ##- Automatically format with ruff
@@ -75,11 +75,14 @@ format-ruff:  ##- Automatically format with ruff
 	success=true
 	ruff check --fix $(SOURCES) || success=false
 	ruff format $(SOURCES)
-	$success || exit 1
+	$$success || exit 1
 
 .PHONY: format-codespell
 format-codespell:  ##- Fix spelling issues with codespell
 	uv run codespell --toml pyproject.toml --write-changes $(SOURCES)
+
+.PHONY: autoformat
+autoformat: format  ## Alias for 'format'
 
 ---------------- : ## ----------------
 
