@@ -72,7 +72,10 @@ autoformat: format-ruff format-codespell  ## Run all automatic formatters
 .PHONY: format-ruff
 format-ruff:  ##- Automatically format with ruff
 	ruff check --fix $(SOURCES)
+	success=true
+	ruff check --fix $(SOURCES) || success=false
 	ruff format $(SOURCES)
+	$success || exit 1
 
 .PHONY: format-codespell
 format-codespell:  ##- Fix spelling issues with codespell
