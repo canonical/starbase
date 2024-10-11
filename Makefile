@@ -38,11 +38,11 @@ help: ## Show this help.
 setup: ## Set up a development environment
 ifeq ($(OS),Linux)
 	changes="`sudo snap install --no-wait codespell`"
-	changes="${changes} `sudo snap install --no-wait ruff`"
-	changes="${changes} `sudo snap install --no-wait shellcheck`"
-	changes="${changes} `sudo snap install --classic --no-wait astral-uv`"
-	for change in ${changes}; do
-		snap watch ${change}
+	changes="$$changes `sudo snap install --no-wait ruff`"
+	changes="$$changes `sudo snap install --no-wait shellcheck`"
+	changes="$$changes `sudo snap install --classic --no-wait astral-uv`"
+	for change in $$changes; do
+		snap watch $$change
 	done
 else ifeq ($(OS),Windows_NT)
 	pipx install uv
