@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: lengau/starflow/lint@work/CRAFT-3602/test-action
+      - name: Run linters
+        uses: lengau/starflow/lint@work/CRAFT-3602/test-action
   unit-tests:
     strategy:
       matrix:
@@ -24,7 +25,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-      - uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
+      - name: Run unit tests with coverage
+        uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
         with:
           python-versions: 3.10 3.11 3.12 3.13
           tics-token: ${{ secrets.TICSAUTHTOKEN }}
@@ -36,7 +38,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
-      - uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
+      - name: Run integration tests
+        uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
         with:
           python-versions: 3.10 3.12
           target: test-integration
