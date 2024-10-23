@@ -52,7 +52,7 @@ setup-docs: install-uv  ##- Set up a documentation-only environment
 
 .PHONY: setup-precommit
 setup-precommit: install-uv  ##- Set up pre-commit hooks in this repository.
-ifeq ($(shell command -v pre-commit),)
+ifeq ($(shell which pre-commit),)
 	uv tool install pre-commit
 endif
 	pre-commit install
@@ -96,7 +96,7 @@ lint-mypy:  ##- Check types with mypy
 
 .PHONY: lint-pyright
 lint-pyright:  ##- Check types with pyright
-ifneq ($(shell command -v pyright),) # Prefer the system pyright
+ifneq ($(shell which pyright),) # Prefer the system pyright
 	pyright --pythonpath .venv/bin/python
 else
 	# Fix for a bug in npm
@@ -157,7 +157,7 @@ package-pip:  ##- Build packages for pip (sdist, wheel)
 
 .PHONY: package-snap
 package-snap: snap/snapcraft.yaml  ##- Build snap package
-ifeq ($(shell command -v snapcraft),)
+ifeq ($(shell which snapcraft),)
 	sudo snap install --classic snapcraft
 endif
 	snapcraft pack
@@ -184,31 +184,31 @@ clean:  ## Clean up the development environment
 
 .PHONY: install-uv
 install-uv:
-ifneq ($(shell command -v uv),)
-else ifneq ($(shell command -v snap),)
+ifneq ($(shell which uv),)
+else ifneq ($(shell which snap),)
 	sudo snap install --classic astral-uv
-else ifneq ($(shell command -v brew),)
+else ifneq ($(shell which brew),)
 	brew install uv
 else ifeq ($(OS),Windows_NT)
-	powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+	pwsh -c "irm https://astral.sh/uv/install.ps1 | iex"
 else
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 endif
 
 .PHONY: install-codespell
 install-codespell:
-ifneq ($(shell command -v codespell),)
-else ifneq ($(shell command -v snap),)
+ifneq ($(shell which codespell),)
+else ifneq ($(shell which snap),)
 	sudo snap install codespell
-else ifneq ($(shell command -v brew),)
+else ifneq ($(shell which brew),)
 	make install-uv
 	uv tool install codespell
 endif
 
 .PHONY: install-ruff
 install-ruff:
-ifneq ($(shell command -v ruff),)
-else ifneq ($(shell command -v snap),)
+ifneq ($(shell which ruff),)
+else ifneq ($(shell which snap),)
 	sudo snap install ruff
 else
 	make install-uv
@@ -217,9 +217,9 @@ endif
 
 .PHONY: install-shellcheck
 install-shellcheck:
-ifneq ($(shell command -v shellcheck),)
-else ifneq ($(shell command -v snap),)
+ifneq ($(shell which shellcheck),)
+else ifneq ($(shell which snap),)
 	sudo snap install shellcheck
-else ifneq ($(shell command -v brew),)
+else ifneq ($(shell which brew),)
 	brew install shellcheck
 endif

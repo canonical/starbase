@@ -11,44 +11,6 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run linters
-        uses: lengau/starflow/lint@work/CRAFT-3602/test-action
-  unit-tests:
-    strategy:
-      matrix:
-        platform:
-          - ubuntu-latest
-          - [noble, arm64]  # Self-hosted Ubuntu Noble runner to test arm64
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run unit tests with coverage
-        uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
-        with:
-          python-versions: 3.10 3.11 3.12 3.13
-          tics-token: ${{ secrets.TICSAUTHTOKEN }}
-  integration-tests:
-    strategy:
-      matrix:
-        platform:
-          - ubuntu-latest
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run integration tests
-        uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
-        with:
-          python-versions: 3.10 3.12
-          target: test-integration
-  lowest-tests:  # Run unit and integration tests on the oldest Python available with UV
-    runs-on: ubuntu-latest
-    env:
-      UV_RESOLUTION: lowest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: lengau/starflow/test-python@work/CRAFT-3602/test-action
-        with:
-          python-versions: "3.10"
+    uses: lengau/starflow/.github/workflows/lint-python.yaml@work/CRAFT-3602/test-workflows
+  test:
+    uses: lengau/starflow/.github/workflows/test-python.yaml@work/CRAFT-3602/test-workflows
