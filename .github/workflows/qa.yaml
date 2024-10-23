@@ -1,0 +1,16 @@
+name: QA
+on:
+  push:
+    branches:
+      - "main"
+      - "feature/*"
+      - "hotfix/*"
+      - "release/*"
+      - "renovate/*"
+  pull_request:
+
+jobs:
+  lint:
+    uses: lengau/starflow/.github/workflows/lint-python.yaml@work/CRAFT-3602/test-workflows
+  test:
+    uses: lengau/starflow/.github/workflows/test-python.yaml@work/CRAFT-3602/test-workflows

@@ -1,0 +1,7 @@
+name: Check policy
+on:
+  pull_request:
+
+jobs:
+  policy:
+    uses: lengau/starflow/.github/workflows/policy.yaml@work/CRAFT-3602/test-workflows
