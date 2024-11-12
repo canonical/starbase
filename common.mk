@@ -37,7 +37,7 @@ setup: install-uv setup-precommit ## Set up a development environment
 	uv sync --frozen --all-extras
 
 .PHONY: setup-tests
-setup-tests: install-uv  ##- Set up a testing environment without linters
+setup-tests: install-uv install-build-deps ##- Set up a testing environment without linters
 	uv sync --frozen
 
 .PHONY: setup-lint
