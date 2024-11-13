@@ -114,19 +114,20 @@ lint-twine: dist/*  ##- Lint Python packages with twine
 	uv tool run twine check dist/*
 
 .PHONY: test
-test: test-unit test-integration  ## Run all tests
+test:  ## Run all tests
+	uv run pytest
 
-.PHONY: test-unit
-test-unit:  ##- Run unit tests
-	uv run pytest tests/unit
+.PHONY: test-fast
+test-fast:  ##- Run fast tests
+	uv run pytest -m 'not slow'
 
-.PHONY: test-integration
-test-integration:  ##- Run integration tests
-	uv run pytest tests/integration
+.PHONY: test-slow
+test-slow:  ##- Run slow tests
+	uv run pytest -m 'slow'
 
 .PHONY: test-coverage
 test-coverage:  ## Generate coverage report
-	uv run coverage run --source $(PROJECT) -m pytest tests/unit
+	uv run coverage run --source $(PROJECT) -m pytest
 	uv run coverage xml -o coverage.xml
 	uv run coverage report -m
 	uv run coverage html
