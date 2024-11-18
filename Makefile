@@ -32,7 +32,7 @@ ifeq ($(shell which apt-get),)
 	$(warning Cannot install build dependencies without apt.)
 	$(warning Cannot install build dependencies on non-linux platforms.)
 else ifeq ($(wildcard /usr/include/libxml2/libxml/xpath.h),)
-	sudo apt-get install libxml2-dev libxslt1-dev
+	sudo $(APT) install libxml2-dev libxslt1-dev
 else ifeq ($(wildcard /usr/include/libxslt/xslt.h),)
-	sudo apt-get install libxslt1-dev
+	sudo $(APT) install libxslt1-dev
 endif

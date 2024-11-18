@@ -7,6 +7,11 @@ DOCS=docs
 ifneq ($(OS),Windows_NT)
 	OS := $(shell uname)
 endif
+ifdef CI
+    APT := apt-get --yes
+else
+	APT := apt-get
+endif
 
 .DEFAULT_GOAL := help
 
