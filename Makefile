@@ -30,9 +30,10 @@ publish-pypi: clean package-pip lint-twine  ##- Publish Python packages to pypi
 install-build-deps:
 ifeq ($(shell which apt-get),)
 	$(warning Cannot install build dependencies without apt.)
-	$(warning Cannot install build dependencies on non-linux platforms.)
 else ifeq ($(wildcard /usr/include/libxml2/libxml/xpath.h),)
-	sudo $(APT) install libxml2-dev libxslt1-dev
+	sudo $(APT) install libxml2-dev libxslt1-dev python3-venv
 else ifeq ($(wildcard /usr/include/libxslt/xslt.h),)
-	sudo $(APT) install libxslt1-dev
+	sudo $(APT) install libxslt1-dev python3-venv
+else ifeq ($(wildcard /usr/share/doc/python3-venv/copyright),)
+	sudo $(APT) install python3-venv
 endif
