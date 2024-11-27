@@ -108,8 +108,8 @@ continuity.
   previous paragraph and add a separate list here, with the same format of
   "<package> or higher".>
 
-  For development and testing, Starcraft requires at minimum a <architecture>
-  system or VM with <number>GB RAM.
+  For development and testing, Starcraft requires a <architecture>
+  system or VM with a minimum of <number>GB RAM.
 
 
   What's new
