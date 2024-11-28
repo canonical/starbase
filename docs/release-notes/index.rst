@@ -53,7 +53,10 @@ Canonical is committed to supporting the <"latest major release" or "last two
 major releases"> of Starcraft. <Optional: "We forward-port changes in older
 releases to the latest release, if they're compatible.">
 
-Starcraft is released according to the Semantic Versioning 2.0.0 scheme with
+Starcraft is released when it achieves development milestones in its product
+lifecycle. It doesn't follow a predefined release cadence.
+
+Starcraft release naming follows the Semantic Versioning 2.0.0 scheme with
 numbers for major, minor, and patch versions.
 
 .. list-table::
@@ -64,16 +67,16 @@ numbers for major, minor, and patch versions.
       - Significance
     * - Major
       - **3**.1.2
-      - A change that breaks compatibility with the previous version.
+      - <Apps: "A change that drops support for an earlier software base.">
+        
+        <Libraries: "A change that breaks compatibility with the previous
+        version.">
     * - Minor
       - 3.\ **1**\ .2
       - A new feature within the major version.
     * - Patch
       - 3.1.\ **2**
       - A bug fix within the major or minor version.
-
-Starcraft is released when it achieves development milestones in its product
-lifecycle. It doesn't follow a predefined release cadence.
 
 
 Long-term support
@@ -82,6 +85,9 @@ Long-term support
 Starcraft doesn't have long-term support (LTS) releases. However, we typically
 deliver a compatibility patch shortly after Ubuntu LTS releases to ensure
 continuity.
+
+Starcraft software bases are derived from Ubuntu LTS releases, and their
+development keeps pace with the OS's new releases and support lifecycle.
 
 .. toctree::
    :maxdepth: 1
