@@ -68,7 +68,7 @@ numbers for major, minor, and patch versions.
     * - Major
       - **3**.1.2
       - <Apps: "A change that drops support for an earlier software base.">
-        
+
         <Libraries: "A change that breaks compatibility with the previous
         version.">
     * - Minor
@@ -83,7 +83,7 @@ Long-term support
 -----------------
 
 Starcraft doesn't have long-term support (LTS) releases. However, we typically
-deliver a compatibility patch shortly after Ubuntu LTS releases to ensure
+deliver a compatibility release shortly after Ubuntu LTS releases to ensure
 continuity.
 
 Starcraft software bases are derived from Ubuntu LTS releases, and their
@@ -114,15 +114,14 @@ development keeps pace with the OS's new releases and support lifecycle.
   previous paragraph and add a separate list here, with the same format of
   "<package> or higher".>
 
-  For development and testing, Starcraft requires a <architecture>
-  system or VM with a minimum of <number>GB RAM.
+  For development and testing, Starcraft requires a <architecture> system or VM
+  with a minimum of <number>GB RAM.
 
 
   What's new
   ----------
 
-  Starcraft 1.0 brings the following features, integrations, and
-  improvements.
+  Starcraft 1.0 brings the following features, integrations, and improvements.
 
 
   <Important change>
@@ -148,14 +147,15 @@ development keeps pace with the OS's new releases and support lifecycle.
   <Paragraph 1, optional: Briefly cover the previous behaviour or the change in
   circumstances. For example, "With Ubuntu 24.04 LTS, the Snap Store and App
   Center now collect public reviews for snaps and assign an averaged score to
-  them to provide users and authors an avenue for discoverability and feedback.">
+  them to provide users and authors an avenue for discoverability and
+  feedback.">
 
   <Paragraph 2: Present the new behaviour or feature. In words, *show* what the
-  feature is and make a case for how the reader could benefit from it. Centre the
-  user whenever possible ("you"), and speak on behalf of Canonical ("we"). Prefer
-  general, simple usage over complex applications. Use past tense. For example,
-  "We understand that some authors may not want to have their snaps publicly
-  ranked. If you prefer to disable ranking for your snap, we added the
+  feature is and make a case for how the reader could benefit from it. Centre
+  the user whenever possible ("you"), and speak on behalf of Canonical ("we").
+  Prefer general, simple usage over complex applications. Use past tense. For
+  example, "We understand that some authors may not want to have their snaps
+  publicly ranked. If you prefer to disable ranking for your snap, we added the
   ``feedback`` key in Snapcraft recipes, which contains child keys for
   controlling many of the rating and feedback features in the store. You can
   declare ``voting: false`` to disable voting".>
@@ -163,8 +163,9 @@ development keeps pace with the OS's new releases and support lifecycle.
   <Paragraph 3, optional: Provide a call to action. This could take several
   forms, such as a call to immediately perform a relevant action in Starcraft,
   solicititation of the reader's feedback on a form or forum, or a link to
-  documentation, demo, blog post, and so on. For example, "See ``:ref:`Manage store
-  profile``` to configure how the public can engage with your snap on the store".>
+  documentation, demo, blog post, and so on. For example, "See ``:ref:`Manage
+  store profile``` to configure how the public can engage with your snap on the
+  store".>
 
 
   Minor features
@@ -197,44 +198,47 @@ development keeps pace with the OS's new releases and support lifecycle.
   adequate for protecting data in transit".>
 
   <Paragraph 2: State precisely what was removed or disabled. Advise on an
-  alternative solution, or state if no alternative exists. If necessary, describe
-  the consequences of the reader's inaction. Link to relevant documentation,
-  standards, or public discussion. For example, "In accordance with the report,
-  Starcraft 1.0 no longer supports encryption algorithm X. As of this release, if
-  you haven't already we highly recommend you immediately switch to encryption
-  algorithm Y to ensure your data stays protected. For more details about this
-  decision and our policy, see ```Security notice on encryption X <>`_`` on the
-  Ubuntu blog.">
+  alternative solution, or state if no alternative exists. If necessary,
+  describe the consequences of the reader's inaction. Link to relevant
+  documentation, standards, or public discussion. For example, "In accordance
+  with the report, Starcraft 1.0 no longer supports encryption algorithm X. As
+  of this release, if you haven't already we highly recommend you immediately
+  switch to encryption algorithm Y to ensure your data stays protected. For
+  more details about this decision and our policy, see ```Security notice on
+  encryption X <>`_`` on the Ubuntu blog.">
 
 
   Deprecated features in Starcraft 1.0
   ------------------------------------
 
-  The following features should no longer be used in Starcraft 1.0, and will be removed in Starcraft 1.1.
+  The following features should no longer be used in Starcraft 1.0, and will be
+  removed in Starcraft 1.1.
 
 
   Deprecated <feature z>
   ~~~~~~~~~~~~~~~~~~~~~~
 
-  <Use the same format as backwards-incompatible changes, but use future tense to
-  describe what we *intend* and *plan* to do in subsequent releases. Think of
-  this as a promise or commitment to the reader, and be mindful of the trust we
-  want them to place in us. Don't write conjecture or make promises about details
-  that haven't been decided. Include only the decisions that we have set in stone
-  and information we're allowed to disclose at of the release day. Use phrases
-  like "we plan to", or "we are working on", or "we have scheduled development
-  of". End by linking to relevant documentation, standards, or public discussion.
-  For example, "In October 2024, the NIST published SP ABC-123, urging software
-  publishers to cease the use of encryption algorithm X. We are deprecating its
-  usage in this release, and plan to remove it in Starcraft 1.1. For more details
-  about this decision and our policy, see ```Security notice on encryption X <>`_``
-  on the Ubuntu blog.">
+  <Use the same format as backwards-incompatible changes, but use future tense
+  to describe what we *intend* and *plan* to do in subsequent releases. Think
+  of this as a promise or commitment to the reader, and be mindful of the trust
+  we want them to place in us. Don't write conjecture or make promises about
+  details that haven't been decided. Include only the decisions that we have
+  set in stone and information we're allowed to disclose at of the release day.
+  Use phrases like "we plan to", or "we are working on", or "we have scheduled
+  development of". End by linking to relevant documentation, standards, or
+  public discussion. For example, "In October 2024, the NIST published SP
+  ABC-123, urging software publishers to cease the use of encryption algorithm
+  X. We are deprecating its usage in this release, and plan to remove it in
+  Starcraft 1.1. For more details about this decision and our policy, see
+  ```Security notice on encryption X <>`_`` on the Ubuntu blog.">
 
 
   Known issues
   ------------
 
-  The following issues are known and scheduled to be fixed in upcoming patch releases.
+  The following issues are known and scheduled to be fixed in upcoming patch
+  releases.
+
   See individual issue links for any mitigations.
 
   - <Ticket ID> <Title>
