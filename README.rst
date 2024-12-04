@@ -110,7 +110,8 @@ Create a new project
    Canonical legal team for the specific project you intend to release. We use
    LGPL v3 for libraries, and GPL v3 for apps.
 #. Rename any files or directories and ensure references are updated.
-#. Replace any instances of the word ``Starcraft`` with the product's name.
+#. Replace any instances of the words ``Starcraft`` and ``starbase`` with the product's
+   name.
 #. Place contact information in a code of conduct.
 #. Rewrite the README.
 #. If a Diataxis quadrant (tutorials, how-tos, references, explanations)
