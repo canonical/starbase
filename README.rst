@@ -100,6 +100,12 @@ Create a new project
 --------------------
 
 #. `Use this template`_ to create your repository.
+#. Sync the git history with starbase to ease future merging:
+   - ``git clone <your-repo>``
+   - ``git remote add starbase git@github.com:canonical/starbase.git``
+   - ``git merge --allow-unrelated-histories starbase/main``
+   - ``git push -f origin main``
+   - ``git remote remove starbase``
 #. Ensure the ``LICENSE`` file represents the current best practices from the
    Canonical legal team for the specific project you intend to release. We use
    LGPL v3 for libraries, and GPL v3 for apps.
