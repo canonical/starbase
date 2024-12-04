@@ -85,7 +85,8 @@ Migrate existing projects
 #. If you're rebasing a library, add the integrations tests structure.
    Applications should use spread for integration tests.
 
-# Finally, once all files are manually synced, actually sync the git history:
+#. Finally, once all files are manually synced, actually sync the git history:
+
    - ``git remote add starbase git@github.com:canonical/starbase.git``
    - ``git merge --allow-unrelated-histories starbase/main``
    - ``git remote remove starbase``
