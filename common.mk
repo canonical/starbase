@@ -118,7 +118,7 @@ lint-docs:  ##- Lint the documentation
 	uv run --extra docs sphinx-lint --max-line-length 88 --enable all $(DOCS)
 
 .PHONY: lint-twine
-lint-twine: dist/*  ##- Lint Python packages with twine
+lint-twine: pack-pip  ##- Lint Python packages with twine
 	uv tool run twine check dist/*
 
 .PHONY: test
@@ -149,7 +149,7 @@ docs-auto:  ## Build and host docs with sphinx-autobuild
 	uv run --extra docs sphinx-autobuild -b html --open-browser --port=8080 --watch $(PROJECT) -W $(DOCS) $(DOCS)/_build
 
 .PHONY: pack-pip
-pack-pip dist/*:  ##- Build packages for pip (sdist, wheel)
+pack-pip:  ##- Build packages for pip (sdist, wheel)
 	uv build .
 
 # Below are intermediate targets for setup. They are not included in help as they should
