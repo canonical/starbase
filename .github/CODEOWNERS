@@ -1,0 +1,17 @@
+# GitHub CODEOWNERS. See:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# Remember, the last match takes precedence.
+
+# Replace the Starcraft team with your appropriate code owners.
+
+# Global owner, used as a last resort.
+*       @canonical/starcraft
+
+# General code owner
+*.py    @canonical/starcraft
+
+# Documentation owners
+/docs/  @medubelko @canonical/starcraft
+
+# Finally, all CODEOWNERS changes need to be approved by The Man, Himself.
+/.github/CODEOWNERS     @sergiusens
