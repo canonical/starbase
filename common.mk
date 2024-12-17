@@ -61,7 +61,11 @@ setup-precommit: install-uv  ##- Set up pre-commit hooks in this repository.
 ifeq ($(shell which pre-commit),)
 	uv tool install pre-commit
 endif
+ifeq ($(shell which pre-commit),)
+	uv tool run pre-commit install
+else
 	pre-commit install
+endif
 
 .PHONY: clean
 clean:  ## Clean up the development environment
