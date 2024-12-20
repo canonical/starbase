@@ -8,7 +8,7 @@ ifneq ($(OS),Windows_NT)
 	OS := $(shell uname)
 endif
 ifdef CI
-    APT := apt-get --yes
+	APT := apt-get --yes
 else
 	APT := apt-get
 endif
@@ -245,7 +245,7 @@ ifneq ($(shell which pyright),)
 else ifneq ($(shell which snap),)
 	sudo snap install --classic pyright
 else
-    # Workaround for a bug in npm
+	# Workaround for a bug in npm
 	[ -d "$(HOME)/.npm/_cacache" ] && chown -R `id -u`:`id -g` "$(HOME)/.npm" || true
 	uv tool install pyright
 endif
