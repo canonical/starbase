@@ -276,6 +276,8 @@ install-npm:
 ifneq ($(shell which npm),)
 else ifneq ($(shell which snap),)
 	sudo snap install --classic node
+else ifneq ($(shell which brew),)
+	brew install node
 else
 	$(error npm not installed. Please install it yourself.)
 endif
