@@ -281,4 +281,4 @@ development keeps pace with the OS's new releases and support lifecycle.>
   `@alex <>`_,
   `@blair <>`_,
   `@cam <>`_,
-  `@devin <>`_
+  and `@devin <>`_
