@@ -48,7 +48,7 @@ help: ## Show this help.
 
 .PHONY: setup
 setup: install-uv setup-precommit ## Set up a development environment
-	uv sync --all-extras
+	uv sync --all-groups
 
 .PHONY: setup-tests
 setup-tests: install-uv install-build-deps ##- Set up a testing environment without linters
