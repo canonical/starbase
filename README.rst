@@ -110,6 +110,7 @@ Create a new project
 
 #. `Use this template`_ to create your repository.
 #. Sync the git history with starbase to ease future merging:
+
    - ``git clone <your-repo>``
    - ``git remote add starbase git@github.com:canonical/starbase.git``
    - ``git merge --allow-unrelated-histories starbase/main``
