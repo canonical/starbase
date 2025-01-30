@@ -48,19 +48,19 @@ help: ## Show this help.
 
 .PHONY: setup
 setup: install-uv setup-precommit ## Set up a development environment
-	uv sync --all-groups
+	uv sync $(UV_TEST_GROUPS) $(UV_LINT_GROUPS) $(UV_DOCS_GROUPS)
 
 .PHONY: setup-tests
 setup-tests: install-uv install-build-deps ##- Set up a testing environment without linters
-	uv sync
+	uv sync $(UV_TEST_GROUPS)
 
 .PHONY: setup-lint
 setup-lint: install-uv install-shellcheck install-pyright install-lint-build-deps  ##- Set up a linting-only environment
-	uv sync --no-install-workspace --group lint --group types
+	uv sync $(UV_LINT_GROUPS)
 
 .PHONY: setup-docs
 setup-docs: install-uv  ##- Set up a documentation-only environment
-	uv sync --no-dev --group docs
+	uv sync --no-dev $(UV_DOCS_GROUPS)
 
 .PHONY: setup-precommit
 setup-precommit: install-uv  ##- Set up pre-commit hooks in this repository.
@@ -202,7 +202,7 @@ test-coverage:  ## Generate coverage report
 
 .PHONY: docs
 docs:  ## Build documentation
-	uv run --group docs sphinx-build -b html -W $(DOCS) $(DOCS)/_build
+	uv run $(UV_DOCS_GROUPS) sphinx-build -b html -W $(DOCS) $(DOCS)/_build
 
 .PHONY: docs-auto
 docs-auto:  ## Build and host docs with sphinx-autobuild
