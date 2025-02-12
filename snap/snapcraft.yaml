@@ -1,0 +1,54 @@
+name: starcraft
+version: git
+base: core24
+summary: Single-line elevator pitch for your amazing snap # 79 char long summary
+description: |
+  This is starcraft description. You have a paragraph or two to tell the
+  most important story about your snap. Keep it under 100 words though,
+  we live in tweetspace and your description wants to look good in the snap
+  store.
+confinement: strict
+grade: devel
+license: GPL-3.0
+compression: lzo
+
+platforms:
+  amd64:
+  arm64:
+  armhf:
+  riscv64:
+  s390x:
+  ppc64el:
+
+apps:
+  starcraft:
+    command: bin/starcraft
+    completer: completion.sh
+    plugs:
+      - network
+      - home
+
+parts:
+  starcraft:
+    source: .
+    plugin: uv
+    build-packages:
+      - cargo
+      - git
+      - libffi-dev
+      - libssl-dev
+      - pkg-config
+    build-snaps:
+      - astral-uv
+    build-environment:
+      - UV_COMPILE_BYTECODE: "1"
+      - UV_NO_BINARY: "1"
+
+  bash-completion:
+    after: [starcraft]
+    plugin: nil
+    build-environment:
+      - PYTHONPATH: $CRAFT_STAGE/lib/python3.12/site-packages
+    override-build: |
+      python3 -m craft_cli.completion $CRAFT_PROJECT_NAME starcraft.app:get_app_info \
+        > $CRAFT_PART_INSTALL/completion.sh
