@@ -64,7 +64,7 @@ Migrate existing projects
       Don't worry about making the contents match, Starbase's is very specific.
 
    #. ``SECURITY.md`` - Match up the content of your project's ``SECURITY.md`` file as
-      closely as you can to the structure of `the Starbase template>`_. Be sure to read
+      closely as you can to the structure of `the Starbase template <SECURITY.md>`_. Be sure to read
       the comments in the template closely.
 
 #. Run all the linters: ``make lint``
