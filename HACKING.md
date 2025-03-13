@@ -50,10 +50,11 @@ The branch name should be brief and less than 200 characters.
 Branch names are formatted as `<category>/<name>`.
 
 This naming convention provides a few benefits:
+
 - GitHub workflows can choose which categories they should run on
 - GitHub branches rules can be configured per category
 - Some IDEs and git tools display categorized branches in a neat
-and nested format
+  and nested format
 
 #### `main`
 
