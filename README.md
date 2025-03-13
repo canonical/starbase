@@ -29,19 +29,20 @@ TODO
         4.  `ruff format`
     3.  Replace use of black, flake8, pydocstyle, isort, and pylint in
         Makefile/CI with:
-        -   `ruff check --fix`
-        -   `ruff format`
+        - `ruff check --fix`
+        - `ruff format`
 3.  Modify top-level files in your project to match what\'s in Starbase
     as closely as possible.
+
     1.  `Makefile` - Ensure you use `uv` and at least have the same
         targets:
 
-        -   `setup`
-        -   `lint`
-        -   `test-unit`
-        -   `test-integration` (If this applies to your repo, i.e. the
-            repo is a library rather than an application)
-        -   `coverage`
+        - `setup`
+        - `lint`
+        - `test-unit`
+        - `test-integration` (If this applies to your repo, i.e. the
+          repo is a library rather than an application)
+        - `coverage`
 
     2.  `pyproject.toml` - Expand from just the ruff things: move things
         into here from your `setup.py`, `setup.cfg`, and
@@ -54,57 +55,58 @@ TODO
         `pandoc -o README.md README.rst`
 
         Don\'t worry about making the contents match, Starbase\'s is
-        very specific.
+        very specific. Be sure to review the changes it makes - pandoc
+        sometimes does weird things with lists and certain rST directives.
 
     4.  `SECURITY.md` - Match the content of your project\'s
         `SECURITY.md` file as closely as you can to the structure of the
         [Security policy template](SECURITY.md). Be sure to follow the
         comments in the template closely.
+
 4.  Run all the linters: `make lint`
     1.  `mypy`:
-        -   Mypy checks the same things as `ruff`\'s `ANNXXX` checks,
-            but `ruff`\'s `noqa` directives mean nothing to mypy.
-            You\'ll need to fix these by hand, mostly by adding type
-            annotations to function definitions.
+        - Mypy checks the same things as `ruff`\'s `ANNXXX` checks,
+          but `ruff`\'s `noqa` directives mean nothing to mypy.
+          You\'ll need to fix these by hand, mostly by adding type
+          annotations to function definitions.
     2.  `pyright`:
-        -   For errors along the lines of \"Stub file not found for
-            \$library\", check for the existence of pip package
-            `typing-$library` and add it as a dependency.
-        -   If you have lots of errors you may need to remove the
-            `strict` directive from `pyproject.toml`.
+        - For errors along the lines of \"Stub file not found for
+          \$library\", check for the existence of pip package
+          `typing-$library` and add it as a dependency.
+        - If you have lots of errors you may need to remove the
+          `strict` directive from `pyproject.toml`.
 5.  Do a side-by-side diff of the `.gitignore` files in your project and
     Starbase, making them as close as possible and adding anything that
     makes sense upstream.
 6.  Bring in remaining top-level files:
-    -   .editorconfig
-    -   .pre-commit-config.yaml
-    -   .shellcheckrc
-    -   tox.ini
+    - .editorconfig
+    - .pre-commit-config.yaml
+    - .shellcheckrc
+    - tox.ini
 7.  If you\'re rebasing a library, add the integrations tests structure.
     Applications should use spread for integration tests.
 8.  Finally, once all files are manually synced, actually sync the git
     history:
-    -   `git remote add starbase git@github.com:canonical/starbase.git`
-    -   `git fetch starbase main`
-    -   `git merge --allow-unrelated-histories starbase/main`
-    -   `git remote remove starbase`
-    -   Don\'t forget to review all the new files and dirs that this
-        merge adds -you\'ll want to delete a lot of them.
-    -   When you merge, DO NOT squash, otherwise the starbase history
-        will not be preserved.
+    - `git remote add starbase git@github.com:canonical/starbase.git`
+    - `git fetch starbase main`
+    - `git merge --allow-unrelated-histories starbase/main`
+    - `git remote remove starbase`
+    - Don\'t forget to review all the new files and dirs that this
+      merge adds -you\'ll want to delete a lot of them.
+    - When you merge, DO NOT squash, otherwise the starbase history
+      will not be preserved.
 
 ## Create a new project
 
-1.  [Use this
-    template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+1.  [Use this template].
     to create your repository.
 2.  Sync the git history with starbase to ease future merging:
-    -   `git clone <your-repo>`
-    -   `git remote add starbase git@github.com:canonical/starbase.git`
-    -   `git fetch starbase main`
-    -   `git merge --allow-unrelated-histories starbase/main`
-    -   `git push -f origin main`
-    -   `git remote remove starbase`
+    - `git clone <your-repo>`
+    - `git remote add starbase git@github.com:canonical/starbase.git`
+    - `git fetch starbase main`
+    - `git merge --allow-unrelated-histories starbase/main`
+    - `git push -f origin main`
+    - `git remote remove starbase`
 3.  Ensure the `LICENSE` file represents the current best practices from
     the Canonical legal team for the specific project you intend to
     release. We use LGPL v3 for libraries, and GPL v3 for apps.
@@ -118,5 +120,7 @@ TODO
     from the TOC and delete its card in `docs/index.rst`. You can
     re-index it when at least one document has been produced for it.
 9.  Register the product\'s documentation on our custom domain on [Read
-    the Docs for
-    Business](https://library.canonical.com/documentation/publish-on-read-the-docs).
+    the Docs for Business]
+
+[Use this template]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
+[Read the Docs for Business]: https://library.canonical.com/documentation/publish-on-read-the-docs

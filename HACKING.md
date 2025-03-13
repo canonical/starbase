@@ -2,16 +2,14 @@
 
 Welcome to Starcraft! We hope this document helps you get started.
 Before contributing any code, please sign the [Canonical contributor
-licence agreement](http://www.ubuntu.com/legal/contributors/).
+licence agreement].
 
 ## Setting up a development environment
 
 We use a forking, feature-based workflow, so you should start by forking
 the repository. Once you\'ve done that, clone the project to your
 computer using git clone\'s `--recurse-submodules` parameter. (See more
-on the [git
-submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules#_cloning_submodules)
-documentation.)
+on the [git submodules] documentation.)
 
 To set up a development environment, run:
 
@@ -43,9 +41,7 @@ Specific types of tests can be run with other testing targets shown in
 
 ## Branches
 
-Starcraft projects follow the
-[OneFlow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
-git branching model.
+Starcraft projects follow the [OneFlow] git branching model.
 
 ### Branch names
 
@@ -54,11 +50,10 @@ The branch name should be brief and less than 200 characters.
 Branch names are formatted as `<category>/<name>`.
 
 This naming convention provides a few benefits:
-
-:   -   GitHub workflows can choose which categories they should run on
-    -   GitHub branches rules can be configured per category
-    -   Some IDEs and git tools display categorized branches in a neat
-        and nested format
+- GitHub workflows can choose which categories they should run on
+- GitHub branches rules can be configured per category
+- Some IDEs and git tools display categorized branches in a neat
+and nested format
 
 #### `main`
 
@@ -66,8 +61,7 @@ The main branch containing the latest changes.
 
 #### `renovate/*`
 
-Branches created automatically by the [Renovate
-bot](https://github.com/renovatebot/renovate).
+Branches created automatically by the [Renovate bot].
 
 #### `work/<ticket>-<description>`
 
@@ -112,8 +106,7 @@ For commits that prepare for a release. These commits should update the
 
 ## Commits
 
-Commit messages are based on the [conventional
-commit](https://www.conventionalcommits.org/en/v1.0.0/#summary) style:
+Commit messages are based on the [conventional commit] style:
 
     <type>[(optional scope)][!]: <description>
 
@@ -160,9 +153,9 @@ behavior.
 Commits that refactor code.
 
 Using [Martin Fowler\'s definition](https://refactoring.com/), refactor
-means \"*a change made to the internal structure of software to make it
+means \"_a change made to the internal structure of software to make it
 easier to understand and cheaper to modify without changing its
-observable behavior.*\"
+observable behavior._\"
 
 ##### `style`
 
@@ -170,8 +163,7 @@ Commits that change the syntax, format, or aesthetics of any text in the
 codebase. The meaning of the text should not change.
 
 Examples include: \* automatic changes from tools like `black` and
-`ruff format` \* changes to documentation that don\'t affect the meaning
-\* correcting a typo
+`ruff format` \* changes to documentation that don\'t affect the meaning \* correcting a typo
 
 ##### `test`
 
@@ -192,14 +184,14 @@ Miscellaneous commits that don\'t fit into any other type.
 
 Examples include:
 
--   edits to a comment or docstring
--   type changes
--   accommodating a developer-facing deprecation warning
--   many *small* fixes for an existing PR
--   reverts (`chore(revert): <header of reverted commit>`)
--   merge commits (`chore(merge): <branch or tag> into <branch>`)
-    -   the remote name should not be included (for example, use `main`
-        instead of `origin/main`)
+- edits to a comment or docstring
+- type changes
+- accommodating a developer-facing deprecation warning
+- many _small_ fixes for an existing PR
+- reverts (`chore(revert): <header of reverted commit>`)
+- merge commits (`chore(merge): <branch or tag> into <branch>`)
+    - the remote name should not be included (for example, use `main`
+      instead of `origin/main`)
 
 ##### Choosing the right type
 
@@ -274,7 +266,7 @@ relevant bugs and issues.
 ### Footer
 
 The footer is an optional section of the commit message that can mention
-the signer and co-authors of the commit.
+the signer and co-authors of the commit
 
 Example footers:
 
@@ -314,12 +306,16 @@ mention when the hotfix is incorporated.
 For example, consider a package with a previous release `2.9.0` and a
 latest release of `3.0.0`. If the `2.9.0` receives a hotfix release
 `2.9.1` and is merged back to `main`, then the next `3.x` release should
-indicate that it includes the changes from 2.9.1.
+indicate that it includes the changes from 2.9.1, for example:
 
-::: note
-::: title
-Note
-:::
+```rst
+.. note::
 
-3.0.1 includes changes from the 2.9.1 release.
-:::
+    3.0.1 includes changes from the 2.9.1 release.
+```
+
+[Canonical contributor license agreement]: http://www.ubuntu.com/legal/contributors/
+[git submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules#_cloning_submodules
+[OneFlow]: https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow
+[Renovate bot]: https://github.com/renovatebot/renovate
+[conventional commit]: https://www.conventionalcommits.org/en/v1.0.0/#summary
