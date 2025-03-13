@@ -177,7 +177,7 @@ Commits that improve, add, or remove tests.
 
 Commits that affect the contents of the documentation.
 
-Changes to how documentation is built should use `build(docs)::`.
+Changes to how documentation is built should use `build(docs):`.
 
 Changes to how the documentation is built in the CI/CD pipeline should use the
 `ci(docs):`.
