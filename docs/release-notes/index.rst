@@ -266,17 +266,17 @@ development keeps pace with the OS's new releases and support lifecycle.>
   Fixed bugs and issues
   ---------------------
 
-  The following issues have been resolved in Starcraft 2.0.
+  The following issues have been resolved in Starcraft 8.2.
 
 
-  Starcraft 2.0.1
+  Starcraft 8.2.0
   ~~~~~~~~~~~~~~~
 
   - `ID <link>`_ <Title>
   - `ID <link>`_ <Title>
 
 
-  Starcraft 2.0.2
+  Starcraft 8.2.1
   ~~~~~~~~~~~~~~~
 
   - `ID <link>`_ <Title>
