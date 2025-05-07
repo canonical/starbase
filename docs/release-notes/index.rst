@@ -85,6 +85,8 @@ development keeps pace with the OS's new releases and support lifecycle.>
 .. toctree::
    :maxdepth: 1
 
+   test-1.0
+
 
 .. release note template:
 
