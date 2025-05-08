@@ -49,8 +49,8 @@ TODO
     2. `pyproject.toml` – Expand from just the ruff things: move things into here from
        your `setup.py`, `setup.cfg`, and `requirements.*.txt`.
 
-    3. Project files – If any of the repository documentation (README, CONTRIBUTING,
-       and so on) aren't written in Markdown, convert to a .md with pandoc:
+    3. Project files – If any of the repository docs (README, CONTRIBUTING, and so on)
+       aren't written in Markdown, convert them to `.md` with pandoc:
 
         `pandoc -o README.md README.rst`
 
