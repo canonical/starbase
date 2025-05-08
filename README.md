@@ -60,7 +60,7 @@ TODO
     4. `README.md` – Base the contents of the README on the provided [README
        template](README-template.md). Try and align with the model as closely as you
        can. For an example of this template in use, refer to the [Snapcraft
-       README](https://github.com/canonical/snapcraft/blob/main/README.md).
+       README](https://github.com/canonical/snapcraft/blob/6fa334402a1ebaa6ff58064d49f1f46fd01fb404/README.md).
 
     5. `SECURITY.md` – Match the content of your project's `SECURITY.md` file as closely
        as you can to the structure of the [Security policy template](SECURITY.md). Be
