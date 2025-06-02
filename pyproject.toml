@@ -1,6 +1,6 @@
 [project]
-name = "starcraft"
-description = "The basis for Starcraft team packages"
+name = "debcraft"
+description = "Pack up debs with the Crafting Experience"
 dynamic = ["version"]
 dependencies = []
 classifiers = [
@@ -14,7 +14,7 @@ requires-python = ">=3.10"
 readme = { file = "README.md", content-type = "text/markdown" }
 
 [project.scripts]
-starcraft-hello = "starcraft:hello"
+debcraft-hello = "debcraft:hello"
 
 [dependency-groups]
 lint = [
@@ -80,7 +80,7 @@ build-backend = "setuptools.build_meta"
 
 
 [tool.setuptools_scm]
-write_to = "starcraft/_version.py"
+write_to = "debcraft/_version.py"
 # the version comes from the latest annotated git tag formatted as 'X.Y.Z'
 # version scheme:
 #   - X.Y.Z.post<commits since tag>+g<hash>.d<%Y%m%d>
@@ -139,7 +139,7 @@ skip_empty = true
 exclude_also = ["if (typing\\.)?TYPE_CHECKING:"]
 
 [tool.pyright]
-strict = ["starcraft"]
+strict = ["debcraft"]
 pythonVersion = "3.10"
 pythonPlatform = "Linux"
 exclude = [
@@ -162,7 +162,7 @@ disallow_untyped_decorators = true
 disallow_any_generics = true
 
 [[tool.mypy.overrides]]
-module = ["starcraft.*"]
+module = ["debcraft.*"]
 disallow_untyped_defs = true
 no_implicit_optional = true
 
@@ -173,7 +173,7 @@ strict = false
 [tool.ruff]
 line-length = 88
 target-version = "py310"
-src = ["starcraft", "tests"]
+src = ["debcraft", "tests"]
 extend-exclude = ["docs"]
 
 [tool.ruff.format]

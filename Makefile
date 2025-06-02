@@ -1,7 +1,7 @@
-PROJECT=starcraft
+PROJECT=debcraft
 # Define when more than the main package tree requires coverage
 # like is the case for snapcraft (snapcraft and snapcraft_legacy):
-# COVERAGE_SOURCE="starcraft"
+# COVERAGE_SOURCE="debcraft"
 UV_TEST_GROUPS := "--group=dev"
 UV_DOCS_GROUPS := "--group=docs"
 UV_LINT_GROUPS := "--group=lint" "--group=types"

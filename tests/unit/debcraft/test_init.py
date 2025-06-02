@@ -1,4 +1,4 @@
-# This file is part of starcraft.
+# This file is part of debcraft.
 #
 # Copyright 2023 Canonical Ltd.
 #
@@ -13,29 +13,34 @@
 #
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""Starcraft package demo."""
+"""Basic Debcraft package demo unit tests."""
 
-from typing import Any
+# pyright: reportFunctionMemberAccess=false
+from unittest import mock
 
-try:
-    from ._version import __version__
-except ImportError:  # pragma: no cover
-    from importlib.metadata import version, PackageNotFoundError
-
-    try:
-        __version__ = version("starcraft")
-    except PackageNotFoundError:
-        __version__ = "dev"
+import debcraft
 
 
-def hello(people: list[Any] | None = None) -> None:
-    """Says hello."""
-    print("Hello *craft team!")
-    if people:
-        for person in people:
-            print(f"Hello {person}!")
+def test_version():
+    assert debcraft.__version__ is not None
 
 
-__all__ = [
-    "__version__",
-]
+def test_hello(mocker):
+    mocker.patch("builtins.print")
+
+    debcraft.hello()
+
+    print.assert_called_once_with("Hello *craft team!")
+
+
+def test_hello_people(mocker):
+    mocker.patch("builtins.print")
+
+    debcraft.hello(["people"])
+
+    print.assert_has_calls(
+        [
+            mock.call("Hello *craft team!"),
+            mock.call("Hello people!"),
+        ],
+    )

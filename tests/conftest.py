@@ -18,17 +18,12 @@ import pytest
 
 @pytest.fixture
 def project_main_module() -> types.ModuleType:
-    """Fixture that returns the project's principal package (imported).
-
-    This fixture should be rewritten by "downstream" projects to return the correct
-    module. Then, every test that uses this fixture will correctly test against the
-    downstream project.
-    """
+    """Fixture that returns the project's principal package (imported)."""
     try:
         # This should be the project's main package; downstream projects must update this.
-        import starcraft
+        import debcraft
 
-        main_module = starcraft
+        main_module = debcraft
     except ImportError:
         pytest.fail(
             "Failed to import the project's main module: check if it needs updating",

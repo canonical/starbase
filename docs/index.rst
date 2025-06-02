@@ -1,6 +1,6 @@
-.. starcraft documentation root file
+.. debcraft documentation root file
 
-Starcraft
+Debcraft
 =========
 
 .. toctree::
@@ -17,11 +17,11 @@ Starcraft
 .. list-table::
 
     * - | :ref:`Tutorial <tutorials>`
-        | **Get started** with a hands-on introduction to Starcraft
+        | **Get started** with a hands-on introduction to Debcraft
     * - | :ref:`How-to guides <how-to-guides>`
         | **Step-by-step guides** covering key operations and common tasks
     * - | :ref:`Reference <reference>`
-        | **Technical information** about Starcraft
+        | **Technical information** about Debcraft
     * - | :ref:`Explanation <explanation>`
         | **Discussion and clarification** of key topics
 
@@ -29,7 +29,7 @@ Starcraft
 Project and community
 ---------------------
 
-Starcraft is a member of the Canonical family. It's an open source project
+Debcraft is a member of the Canonical family. It's an open source project
 that warmly welcomes community projects, contributions, suggestions, fixes
 and constructive feedback.
 

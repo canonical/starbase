@@ -1,6 +1,6 @@
-# Starcraft
+# Debcraft
 
-Welcome to Starcraft! We hope this document helps you get started. Before contributing
+Welcome to Debcraft! We hope this document helps you get started. Before contributing
 any code, please sign the
 [Canonical Contributor Licence Agreement](http://www.ubuntu.com/legal/contributors).
 
@@ -44,7 +44,7 @@ tests can be run with other testing targets shown in `make help`.
 
 ## Branches
 
-Starcraft projects follow the
+Debcraft projects follow the
 [OneFlow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow) Git
 branching model.
 

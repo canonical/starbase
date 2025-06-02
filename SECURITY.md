@@ -16,7 +16,7 @@ vulnerabilities.
 
 This support tracks the Ubuntu LTS release cycle. The most recent major version will
 always support Ubuntu LTS series still in their regular maintenance lifecycle. When a
-major Starcraft release drops support for an Ubuntu LTS series, the previous major
+major Debcraft release drops support for an Ubuntu LTS series, the previous major
 release remains supported for only the dropped LTS series until the end of its extended
 support lifecycle.
 
@@ -32,7 +32,7 @@ https://docs.github.com/en/code-security/security-advisories/working-with-reposi
 -->
 
 To report a security issue, file a [Private Security
-Report](https://github.com/canonical/starcraft/security/advisories/new) with a
+Report](https://github.com/canonical/debcraft/security/advisories/new) with a
 description of the issue, the steps you took to create the issue, affected versions,
 and, if known, mitigations for the issue.
 

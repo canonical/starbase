@@ -1,4 +1,4 @@
-# This file is part of starcraft.
+# This file is part of debcraft.
 #
 # Copyright 2023 Canonical Ltd.
 #
@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""Basic Starcraft package demo integration tests."""
+"""Basic Debcraft package demo integration tests."""
 
 import subprocess
 
@@ -21,6 +21,6 @@ import subprocess
 def test_cli():
     expected = "Hello *craft team!\n"
 
-    actual = subprocess.check_output(["starcraft-hello"], text=True)
+    actual = subprocess.check_output(["debcraft-hello"], text=True)
 
     assert expected == actual
