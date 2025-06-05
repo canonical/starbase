@@ -58,8 +58,8 @@ TODO
         when interpreting reStructuredText directives.
 
     4. `README.md` – Base the contents of the README on the provided [README
-       template](README-template.md). Try and align with the model as closely as you
-       can. For an example of this template in use, refer to the [Snapcraft
+       template](README.md). Try and align with the model as closely as you can. For an
+       example of this template in use, refer to the [Snapcraft
        README](https://github.com/canonical/snapcraft/blob/6fa334402a1ebaa6ff58064d49f1f46fd01fb404/README.md).
 
     5. `SECURITY.md` – Match the content of your project's `SECURITY.md` file as closely
@@ -140,3 +140,5 @@ TODO
 
 9. Register the product's documentation on our custom domain on [Read the Docs for
    Business](https://library.canonical.com/documentation/publish-on-read-the-docs)
+
+10. Delete `.github/README.md`.
