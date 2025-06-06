@@ -50,7 +50,7 @@ help: ## Show this help.
 	}' | uniq
 
 .PHONY: setup
-setup: install-uv setup-precommit install-build-deps install-woke ## Set up a development environment
+setup: install-uv setup-precommit install-build-deps  ## Set up a development environment
 	uv sync $(UV_TEST_GROUPS) $(UV_LINT_GROUPS) $(UV_DOCS_GROUPS)
 
 .PHONY: setup-tests
@@ -70,7 +70,7 @@ setup-lint: install-uv install-shellcheck install-pyright install-lint-build-dep
 	uv sync $(UV_LINT_GROUPS)
 
 .PHONY: setup-docs
-setup-docs: install-uv install-woke  ##- Set up a documentation-only environment
+setup-docs: install-uv  ##- Set up a documentation-only environment
 	uv sync --no-dev $(UV_DOCS_GROUPS)
 
 .PHONY: setup-precommit
@@ -172,13 +172,12 @@ ifneq ($(CI),)
 endif
 
 .PHONY: lint-docs
-lint-docs: install-woke  ##- Lint the documentation
+lint-docs:  ##- Lint the documentation
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
 	uv run $(UV_DOCS_GROUPS) sphinx-lint --max-line-length 88 --ignore docs/reference/commands --ignore docs/_build --enable all $(DOCS) -d missing-underscore-after-hyperlink,missing-space-in-hyperlink
 	uv run $(UV_DOCS_GROUPS) sphinx-build -b linkcheck -W $(DOCS) $(DOCS)/_build
-	woke docs/ --exit-1-on-failure
 ifneq ($(CI),)
 	@echo ::endgroup::
 endif
@@ -310,15 +309,4 @@ else ifneq ($(shell which brew),)
 	brew install node
 else
 	$(error npm not installed. Please install it yourself.)
-endif
-
-.PHONY: install-woke
-install-woke:
-ifneq ($(shell which woke),)
-else ifneq($(shell which snap),)
-	sudo snap install woke
-else ifneq($(shell which brew),)
-	brew install get-woke/tap/woke
-else
-	$(error woke not installed. Please install it yourself.)
 endif
