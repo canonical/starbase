@@ -32,6 +32,7 @@ html_context = {
     "github_url": "https://github.com/canonical/starbase",
     "github_issues": "https://github.com/canonical/starbase/issues",
     "matrix": "https://matrix.to/#/#starcraft-development:ubuntu.com",
+    "discourse": "",
 }
 
 # Target repository for the edit button on pages
