@@ -89,14 +89,17 @@ github_repository = "starbase"
 # Client-side page redirects.
 rediraffe_redirects = "redirects.txt"
 
-# The base URL for the sphinx-sitemap extension.
-# Change this to your project's RTD URL!
+# The full path to the RTD site.
+# TODO: Change this to your project's RTD URL. If the RTD site isn't live yet, follow
+# the pattern here. If the documentation has moved to documentation.ubuntu.com, enter
+# the URL at that domain. It's OK to use this for private projects.
 # https://sphinx-sitemap.readthedocs.io
 html_baseurl = "https://canonical-starbase.readthedocs-hosted.com/"
 
 # Compose the URL for remote RTD and local builds.
-# If your project doesn't have a `latest` RTD branch set up, change to its default
-# branch!
+# TODO: If your project doesn't have a `latest` RTD branch set up, change to its default
+# branch.
+# https://sphinx-sitemap.readthedocs.io
 if "READTHEDOCS_VERSION" in os.environ:
     version = os.environ["READTHEDOCS_VERSION"]
     sitemap_url_scheme = "{version}{link}"
