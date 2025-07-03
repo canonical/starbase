@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import datetime
 
 project = "Starbase"
@@ -22,13 +23,19 @@ author = "Canonical"
 copyright = "2023-%s, %s" % (datetime.date.today().year, author)
 
 # region Configuration for canonical-sphinx
+
 ogp_site_url = "https://canonical-starbase.readthedocs-hosted.com/"
 ogp_site_name = project
 ogp_image = "https://assets.ubuntu.com/v1/253da317-image-document-ubuntudocs.svg"
 
 html_context = {
+    # The following items are required for public-facing products. Replace the
+    # placeholder links with those specific to your product.
     "product_page": "github.com/canonical/starbase",
     "github_url": "https://github.com/canonical/starbase",
+    "github_issues": "https://github.com/canonical/starbase/issues",
+    "matrix": "https://matrix.to/#/#starcraft-development:ubuntu.com",
+    "discourse": "",  # Leave this blank to hide it from the dropdown
 }
 
 # Target repository for the edit button on pages
@@ -39,6 +46,7 @@ html_theme_options = {
 extensions = [
     "canonical_sphinx",
 ]
+
 # endregion
 
 # region General configuration
@@ -51,6 +59,7 @@ extensions.extend(
         "sphinx.ext.coverage",
         "sphinx.ext.doctest",
         "sphinx-pydantic",
+        "sphinx_sitemap",
         "sphinx_toolbox",
         "sphinx_toolbox.more_autodoc",
         "sphinx.ext.autodoc",  # Must be loaded after more_autodoc
@@ -77,7 +86,24 @@ always_document_param_types = True
 github_username = "canonical"
 github_repository = "starbase"
 
-# endregion
-
 # Client-side page redirects.
 rediraffe_redirects = "redirects.txt"
+
+# The full path to the RTD site.
+# TODO: Change this to your project's RTD URL. If the RTD site isn't live yet, follow
+# the pattern here. If the documentation has moved to documentation.ubuntu.com, enter
+# the URL at that domain. It's OK to use this for private projects.
+# https://sphinx-sitemap.readthedocs.io
+html_baseurl = "https://canonical-starbase.readthedocs-hosted.com/"
+
+# Compose the URL for remote RTD and local builds.
+# TODO: If your project doesn't have a `latest` RTD branch set up, change to its default
+# branch.
+# https://sphinx-sitemap.readthedocs.io
+if "READTHEDOCS_VERSION" in os.environ:
+    version = os.environ["READTHEDOCS_VERSION"]
+    sitemap_url_scheme = "{version}{link}"
+else:
+    sitemap_url_scheme = "latest/{link}"
+
+# endregion

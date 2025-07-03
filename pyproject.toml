@@ -1,7 +1,7 @@
 [project]
 name = "starcraft"
 description = "The basis for Starcraft team packages"
-dynamic = ["version", "readme"]
+dynamic = ["version"]
 dependencies = []
 classifiers = [
     "Development Status :: 1 - Planning",
@@ -11,6 +11,7 @@ classifiers = [
 ]
 license = "GPL-3.0"
 requires-python = ">=3.10"
+readme = { file = "README.md", content-type = "text/markdown" }
 
 [project.scripts]
 starcraft-hello = "starcraft:hello"
@@ -20,15 +21,16 @@ lint = [
     # Left empty for scaffolding and Makefile compatibility
 ]
 types = [
-    "mypy[reports]~=1.15.0",
+    "mypy[reports]~=1.16.0",
     "types-Pygments",
     "types-colorama",
     "types-setuptools",
 ]
 docs = [
-    "canonical-sphinx~=0.4.0",
+    "canonical-sphinx[full]~=0.4.0",
     "sphinx-autobuild~=2024.2",
     "sphinx-pydantic==0.1.1",
+    "sphinx-sitemap>=2.6.0",
     "sphinx-toolbox~=4.0",
     "sphinx-lint~=1.0",
     "sphinxext-rediraffe==0.2.7",
@@ -39,7 +41,7 @@ dev = [
     "pytest~=8.0",
     "pytest-cov~=6.0",
     "pytest-mock~=3.12",
-    "mypy[reports]~=1.15.0",
+    "mypy[reports]~=1.16.0",
     "types-Pygments",
     "types-colorama",
     "types-setuptools",
@@ -77,8 +79,6 @@ constraint-dependencies = [
 requires = ["setuptools>=69.0", "setuptools_scm[toml]>=7.1"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.dynamic]
-readme = { file = "README.md" }
 
 [tool.setuptools_scm]
 write_to = "starcraft/_version.py"
@@ -276,6 +276,7 @@ ignore = [
     "A003",   # Class attribute shadowing built-in (reason: Class attributes don't often get bare references)
     "SIM117", # Use a single `with` statement with multiple contexts instead of nested `with` statements
     # (reason: this creates long lines that get wrapped and reduces readability)
+    "PLW1641", # eq-without-hash (most of our classes should be unhashable)
 
     # Ignored due to conflicts with ruff's formatter:
     # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
