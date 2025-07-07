@@ -14,7 +14,7 @@ else
 	APT := apt-get
 endif
 
-PRETTIER=npm exec --package=prettier -- prettier --log-level warn
+PRETTIER=npm exec --package=prettier@3.6.0 -- prettier --log-level warn # renovate: datasource=npm
 PRETTIER_FILES="**/*.{yaml,yml,json,json5,css,md}"
 
 # Cutoff (in seconds) before a test is considered slow by pytest
@@ -100,6 +100,10 @@ format-ruff: install-ruff  ##- Automatically format with ruff
 .PHONY: format-codespell
 format-codespell:  ##- Fix spelling issues with codespell
 	uv run codespell --toml pyproject.toml --write-changes $(SOURCES)
+
+.PHONY: format-pre-commit
+format-pre-commit:  ##- Format the entire repository using pre-commit
+	uv tool run pre-commit run --all-files
 
 .PHONY: format-prettier
 format-prettier: install-npm  ##- Format files with prettier
