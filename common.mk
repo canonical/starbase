@@ -67,7 +67,7 @@ ifneq ($(CI),)
 endif
 
 .PHONY: setup-lint
-setup-lint: install-uv install-shellcheck install-pyright install-lint-build-deps  ##- Set up a linting-only environment
+setup-lint: install-uv install-shellcheck install-lint-build-deps  ##- Set up a linting-only environment
 	uv sync $(UV_LINT_GROUPS)
 
 .PHONY: setup-docs
@@ -276,17 +276,6 @@ else ifneq ($(shell which brew),)
 	uv tool install codespell
 else
 	$(warning Codespell not installed. Please install it yourself.)
-endif
-
-.PHONY: install-pyright
-install-pyright: install-uv
-ifneq ($(shell which pyright),)
-else ifneq ($(shell which snap),)
-	sudo snap install --classic pyright
-else
-	# Workaround for a bug in npm
-	[ -d "$(HOME)/.npm/_cacache" ] && chown -R `id -u`:`id -g` "$(HOME)/.npm" || true
-	uv tool install pyright
 endif
 
 .PHONY: install-ruff
