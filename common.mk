@@ -51,7 +51,7 @@ help: ## Show this help.
 	}' | uniq
 
 .PHONY: setup
-setup: install-uv setup-docs setup-lint setup-precommit setup-tests setup-tics install-build-deps  ## Set up a development environment
+setup: install-uv setup-docs setup-lint setup-precommit setup-tests install-build-deps  ## Set up a development environment
 
 .PHONY: setup-tests
 setup-tests: install-uv install-build-deps ##- Set up a testing environment without linters
