@@ -21,13 +21,13 @@ lint = [
     # Left empty for scaffolding and Makefile compatibility
 ]
 types = [
-    "mypy[reports]~=1.16.0",
+    "mypy[reports]~=1.17.1",
     "types-Pygments",
     "types-colorama",
     "types-setuptools",
 ]
 docs = [
-    "canonical-sphinx[full]~=0.4.0",
+    "canonical-sphinx[full]~=0.5.1",
     "sphinx-autobuild~=2024.2",
     "sphinx-pydantic==0.1.1",
     "sphinx-sitemap>=2.6.0",
@@ -41,7 +41,7 @@ dev = [
     "pytest~=8.0",
     "pytest-cov~=6.0",
     "pytest-mock~=3.12",
-    "mypy[reports]~=1.16.0",
+    "mypy[reports]~=1.17.1",
     "types-Pygments",
     "types-colorama",
     "types-setuptools",
