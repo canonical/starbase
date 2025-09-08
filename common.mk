@@ -331,10 +331,10 @@ endif
 
 .PHONY: install-ty
 install-ty:
-ifneq ($(shell which ruff),)
+ifneq ($(shell which ty),)
 else ifneq ($(shell which snap),)
 	sudo snap install --classic --edge astral-ty
-	sudo snap astral-ty.ty ty
+	sudo snap alias astral-ty.ty ty
 else
 	make install-uv
 	uv tool install ty
