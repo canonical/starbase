@@ -119,3 +119,7 @@ else:
     sitemap_url_scheme = "latest/{link}"
 
 # endregion
+
+# We have many links on sites that frequently respond with 503s to GitHub runners.
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-linkcheck_retries
+linkcheck_retries = 20
