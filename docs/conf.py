@@ -122,6 +122,7 @@ else:
 
 # We have many links on sites that frequently respond with 503s to GitHub runners.
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-linkcheck_retries
+linkcheck_retries = 20
 linkcheck_anchors_ignore = ["#", ":"]
 linkcheck_ignore = [
     # Ignore releases, since we'll include the next release before it exists.
