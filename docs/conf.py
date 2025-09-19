@@ -125,11 +125,11 @@ else:
 linkcheck_anchors_ignore = ["#", ":"]
 linkcheck_ignore = [
     # Ignore releases, since we'll include the next release before it exists.
-    "^https://github.com/canonical/[a-z]*craft[a-z-]*/releases/.*",
+    r"^https://github.com/canonical/[a-z]*craft[a-z-]*/releases/.*",
     # Entire domains to ignore due to flakiness or issues
-    "^https://www.gnu.org/",
-	"^https://crates.io/",
-	"^https://([\w-]*\.)?npmjs.org",
-	"^https://rsync.samba.org",
-	"^https://ubuntu.com",
+    r"^https://www.gnu.org/",
+    r"^https://crates.io/",
+    r"^https://([\w-]*\.)?npmjs.org",
+    r"^https://rsync.samba.org",
+    r"^https://ubuntu.com",
 ]
