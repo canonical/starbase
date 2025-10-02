@@ -142,7 +142,7 @@ space](https://matrix.to/#/#starcraft-development:ubuntu.com). It's possible tha
 on it has been started, or that it fits into an existing plan. Often, you will save time
 and effort by checking for prior work.
 
-<If the project has a forum, link it here. If not, remove this paragraph.>
+<If your project has a forum, link it here. If not, remove this paragraph.>
 
 For changes that require coordination with the the broader community, create a post on
 the [Starbase forum](https://forum.example.com), the hub for users and developers.
