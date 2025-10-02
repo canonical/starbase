@@ -239,7 +239,7 @@ changes stick, restage the modified files with `git add -A` and commit again.
 
 All nontrivial code changes should be accompanied by a reasonable set of tests.
 
-<Update the next sentence to accurately describe the project's test suite.>
+<Update the next sentence to accurately describe your project's test suite.>
 
 Starbase's test suite includes unit, integration, and
 [Spread](https://github.com/canonical/spread/blob/master/README.md) tests. If you're not
