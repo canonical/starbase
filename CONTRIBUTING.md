@@ -32,6 +32,8 @@ incorporated into the repository.
 
 ### Open source license
 
+<Ensure that the link text matches your project's license.>
+
 Starbase is licensed under [LGPL-3.0](LICENSE).
 
 ## Report an issue or open a request
@@ -42,6 +44,8 @@ add your voice to the issue.
 
 If the bug or feature doesn't have an issue, we invite you to [open
 one](https://github.com/canonical/starbase/issues/new/choose).
+
+<Cut the following section if your project doesn't have bounties.>
 
 ## Apply for a bounty
 
@@ -130,11 +134,15 @@ A Starbase maintainer will then review the issue and assign it to you.
 
 #### Major changes
 
+<Update the link to point to your project's Matrix channel.>
+
 If there's a large feature or fix you'd like to work on, contact us and the rest of the
 community in the [Starcraft Development Matrix
 space](https://matrix.to/#/#starcraft-development:ubuntu.com). It's possible that work
 on it has been started, or that it fits into an existing plan. Often, you will save time
 and effort by checking for prior work.
+
+<If your project has a forum, mention it here.>
 
 Once you've found or created an issue you'd like to take on, propose your solution in
 the issue's thread. In your proposal, describe a plan for the change, its tests, and its
@@ -231,6 +239,8 @@ changes stick, restage the modified files with `git add -A` and commit again.
 
 All nontrivial code changes should be accompanied by a reasonable set of tests.
 
+<Update the next sentence to accurately describe the project's test suite.>
+
 Starbase's test suite includes unit, integration, and
 [Spread](https://github.com/canonical/spread/blob/master/README.md) tests. If you're not
 sure which tests you should add, go with your best judgement – additional tests can be
@@ -282,6 +292,8 @@ make any necessary changes.
 Major changes require new documentation describing the feature's usage and
 specifications. For example, if you implement a new CLI command, describe its usage in
 one of the how-to guides and create a new reference for its options and flags.
+
+<Ensure that the link points to your project's changelog or release notes.>
 
 Ensure that feature changes and fixes are also documented in the relevant [release
 notes](docs/release-notes/).
