@@ -2,6 +2,7 @@
 self-hosted-runner:
   # Labels of self-hosted runner in array of strings.
   labels:
+    - spread-installed
     # Architectures
     - amd64
     - arm64
