@@ -149,6 +149,17 @@ ifneq ($(CI),)
 	@echo ::endgroup::
 endif
 
+.PHONY: lint-pyrefly
+lint-pyrefly:  ##- Check types with pyrefly
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
+	uv tool run pyrefly check
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
+
+
 .PHONY: lint-pyright
 lint-pyright:  ##- Check types with pyright
 ifneq ($(CI),)
