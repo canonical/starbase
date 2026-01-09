@@ -4,6 +4,8 @@
 SOURCES=$(wildcard *.py) $(PROJECT) tests
 DOCS=docs
 DOCS_OUTPUT=$(DOCS)/_build
+export VENVDIR=../.venv
+export VALEDIR=$(VENVDIR)/lib/python*/site-packages/vale
 
 ifneq ($(OS),Windows_NT)
 	OS := $(shell uname)
@@ -55,7 +57,7 @@ setup: install-uv _setup-docs _setup-lint _setup-tests setup-precommit install-b
 	uv sync $(UV_TEST_GROUPS) $(UV_LINT_GROUPS) $(UV_DOCS_GROUPS)
 
 .PHONY: setup-docs
-setup-docs: _setup-docs  ##- Set up a documentation-only environment
+setup-docs: _setup-docs  ##- Set up the documentation environment
 	uv sync --no-dev $(UV_DOCS_GROUPS)
 
 .PHONY: _setup-docs
@@ -200,16 +202,9 @@ ifneq ($(CI),)
 	@echo ::endgroup::
 endif
 
+# Legacy alias for linting docs
 .PHONY: lint-docs
-lint-docs:  ##- Lint the documentation
-ifneq ($(CI),)
-	@echo ::group::$@
-endif
-	uv run $(UV_DOCS_GROUPS) sphinx-lint --ignore docs/reference/commands --ignore docs/_build --enable all $(DOCS) -d line-too-long,missing-underscore-after-hyperlink,missing-space-in-hyperlink
-	uv run $(UV_DOCS_GROUPS) sphinx-build -b linkcheck -W $(DOCS) docs/_linkcheck
-ifneq ($(CI),)
-	@echo ::endgroup::
-endif
+lint-docs: docs-lint  ##- Lint the documenation
 
 .PHONY: lint-twine
 lint-twine: pack-pip  ##- Lint Python packages with twine
@@ -251,13 +246,47 @@ endif
 test-find-slow:  ##- Identify slow tests. Set cutoff time in seconds with SLOW_CUTOFF_TIME
 	uv run pytest --durations 0 --durations-min $(SLOW_CUTOFF_TIME)
 
+# Alias for `html` target in docs project. We want to use our own `.venv`, so we
+# replace it.
 .PHONY: docs
-docs:  ## Build documentation
-	uv run $(UV_DOCS_GROUPS) sphinx-build -b dirhtml -W $(DOCS) $(DOCS_OUTPUT)
+docs: docs-install  ## Render the documentation to disk
+	make -C docs html --no-print-directory
 
+# Alias for `html` target in docs project
 .PHONY: docs-auto
-docs-auto:  ## Build and host docs with sphinx-autobuild
-	uv run --group docs sphinx-autobuild -b dirhtml --open-browser --port=8080 --watch $(PROJECT) -W $(DOCS) $(DOCS_OUTPUT)
+docs-auto: docs-install  ##- Render the documentation in a live session
+	make -C docs serve --no-print-directory
+
+# Override for `install` target in docs project. We still need the Vale setup, so we
+# run that after the parent docs setup.
+.PHONY: docs-install
+docs-install: setup-docs  ##- Set up documentation packages
+	make -C docs vale-install --no-print-directory
+
+# Override for `clean` target in docs project. We don't want to touch `.venv`, so
+# we pass a null dir instead.
+.PHONY: docs-clean
+docs-clean:  ##- Clean the temporary files used in documentation
+	VENVDIR=null
+	make -C docs clean --no-print-directory
+
+# Passthrough for the rest of the targets in docs project
+.PHONY: docs-%
+docs-%: docs-install  ##- Individual documentation tasks. Run 'make docs-help' for the complete list.
+	make -C docs $(@:docs-%=%) --no-print-directory
+
+# Run our own docs linting, then pass to the docs
+.PHONY: docs-lint
+docs-lint: docs  ##- Lint the documentation
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
+	uv run $(UV_DOCS_GROUPS) sphinx-lint --ignore docs/reference/commands --ignore docs/_build --enable all $(DOCS) -d line-too-long,missing-underscore-after-hyperlink,missing-space-in-hyperlink
+	make -C docs vale --no-print-directory
+	make -C docs linkcheck --no-print-directory
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
 
 .PHONY: pack-pip
 pack-pip:  ##- Build packages for pip (sdist, wheel)
