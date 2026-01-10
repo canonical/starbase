@@ -4,8 +4,8 @@
 SOURCES=$(wildcard *.py) $(PROJECT) tests
 DOCS=docs
 DOCS_OUTPUT=$(DOCS)/_build
-export VENVDIR=../.venv
-export VALEDIR=$(VENVDIR)/lib/python*/site-packages/vale
+export VENVDIR ?= ../.venv
+export VALEDIR ?= $(VENVDIR)/lib/python*/site-packages/vale
 
 ifneq ($(OS),Windows_NT)
 	OS := $(shell uname)
