@@ -35,8 +35,8 @@ uv add -r docs/requirements.txt --group docs-starter-pack
 In `docs/Makefile`, make sure these lines are changed like so:
 
 ```diff
--BUILDDIR        = _build
-+BUILDDIR        ?= _build
+- BUILDDIR        = _build
++ BUILDDIR        ?= _build
 ...
 
 - VALEDIR         = $(SPHINXDIR)/venv/lib/python*/site-packages/vale
