@@ -163,7 +163,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_sitemap",
     # Custom Craft extensions
-    "sphinx-pydantic",
     "sphinxext.rediraffe",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
