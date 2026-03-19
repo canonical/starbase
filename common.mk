@@ -268,7 +268,13 @@ test-find-slow:  ##- Identify slow tests. Set cutoff time in seconds with SLOW_C
 # replace it.
 .PHONY: docs
 docs: docs-install  ## Render the documentation to disk
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
 	$(MAKE) -C docs html --no-print-directory
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
 
 # Alias for `serve` target in docs project
 .PHONY: docs-auto
