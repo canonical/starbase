@@ -60,7 +60,13 @@ setup: install-uv _setup-docs _setup-lint _setup-tests setup-precommit install-b
 
 .PHONY: setup-docs
 setup-docs: _setup-docs  ##- Set up the documentation environment
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
 	uv sync --no-dev $(UV_DOCS_GROUPS)
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
 
 .PHONY: _setup-docs
 _setup-docs: install-uv
@@ -273,7 +279,13 @@ docs-auto: docs-install  ##- Render the documentation in a live session
 # run that after the parent docs setup.
 .PHONY: docs-install
 docs-install: setup-docs  ##- Set up documentation packages
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
 	$(MAKE) -C docs vale-install --no-print-directory
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
 
 # Alias for `setup-docs`
 .PHONY: docs-setup
