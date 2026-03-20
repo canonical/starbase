@@ -2,6 +2,8 @@
 
 This is a CI test. Don't merge this change.
 
+fnord
+
 # Starcraft
 
 <Include the build status badges.>
