@@ -1,5 +1,7 @@
 <If the software has approved imagery or logo, add it here.>
 
+This is a CI test. Don't merge this change.
+
 # Starcraft
 
 <Include the build status badges.>
