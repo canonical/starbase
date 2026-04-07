@@ -1,0 +1,32 @@
+version: 2
+updates:
+  ########################
+  # Main package updates #
+  ########################
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "daily" # Actually "weekdays"
+    exclude-paths:
+      # Test data may reference intentionally selected versions and are never ran in production
+      - "tests/"
+      # Docs dependencies are managed upstream: https://github.com/canonical/sphinx-docs-starter-pack
+      - "docs/"
+    labels:
+      - "PR: Dependencies"
+    assignees:
+      - "@canonical/starcraft-renovators"
+
+  ###########################
+  # Infrequent test updates #
+  ###########################
+  - package-ecosystem: "uv"
+    directory: "tests/"
+    schedule:
+      # Although tests are intentionally excluded from updates, it's still healthy to revisit them
+      # periodically so that they reflect real-world use cases.
+      interval: "quarterly"
+    labels:
+      - "PR: Dependencies"
+    assignees:
+      - "@canonical/starcraft-renovators"
