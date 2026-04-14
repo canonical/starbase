@@ -8,6 +8,7 @@ SOURCES=$(wildcard *.py) $(PROJECT) tests
 export DOCS_BUILDDIR ?= _build
 export DOCS_VENVDIR ?= ../.venv
 export VALEDIR ?= $(VENVDIR)/lib/python*/site-packages/vale
+export SPHINXOPTS ?= -c . -d .sphinx/.doctrees -j auto --ignore "../.venv/*" --ignore "reference/commands/*"
 
 ifneq ($(OS),Windows_NT)
 	OS := $(shell uname)
