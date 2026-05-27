@@ -47,6 +47,7 @@ docs-sphinx-stack = [
     "sphinx-llm~=0.4",
     "sphinx-notfound-page~=1.1",
     "sphinx-related-links~=0.1",
+    # "sphinx-reredirects==0.1.6",
     "sphinx-rerediraffe>=0.0.3,<1.0.0",
     "sphinx-roles~=0.1",
     "sphinx-sitemap~=2.9",
