@@ -2124,7 +2124,7 @@ docs = [
     { name = "sphinxext-rediraffe" },
     { name = "vale" },
 ]
-docs-starter-pack = [
+docs-sphinx-stack = [
     { name = "canonical-sphinx" },
     { name = "myst-parser" },
     { name = "packaging" },
@@ -2206,7 +2206,7 @@ docs = [
     { name = "sphinxext-rediraffe", specifier = "==0.3.0" },
     { name = "vale", specifier = "~=3.13" },
 ]
-docs-starter-pack = [
+docs-sphinx-stack = [
     { name = "canonical-sphinx", specifier = "~=0.6" },
     { name = "myst-parser", specifier = "~=4.0" },
     { name = "packaging", specifier = "~=26.1" },

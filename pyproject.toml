@@ -29,11 +29,11 @@ types = [
 docs = [
     "sphinx-lint~=1.0",
     "sphinxext-rediraffe==0.3.0",
-    {include-group = "docs-starter-pack"},
+    {include-group = "docs-sphinx-stack"},
 ]
 # We disable the unused but default SP dependencies slated for removal
 # https://warthogs.atlassian.net/browse/DOCPR-2387
-docs-starter-pack = [
+docs-sphinx-stack = [
     "canonical-sphinx~=0.6",
     "myst-parser~=4.0",
     "packaging~=26.1",

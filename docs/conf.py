@@ -28,7 +28,7 @@ project = "Starbase"
 author = "Canonical Ltd."
 
 # The year in the copyright statement
-copyright = f"2023-{datetime.date.today().year}, {author}"
+copyright = f"2023-{datetime.date.today().year}"
 
 # Sidebar documentation title
 # To disable the title, set it to an empty string.
@@ -201,7 +201,6 @@ linkcheck_retries = 20
 
 # Custom Sphinx extensions; see
 # https://www.sphinx-doc.org/en/master/usage/extensions/index.html
-# NOTE: The canonical_sphinx extension is required for the starter pack.
 extensions = [
     "canonical_sphinx",
     "notfound.extension",
