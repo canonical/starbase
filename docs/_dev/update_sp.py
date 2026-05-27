@@ -21,7 +21,7 @@ from packaging.version import parse as parse_version
 SPHINX_DIR = os.path.abspath(os.path.dirname(__file__))
 DOCS_DIR = os.path.abspath(os.path.join(SPHINX_DIR, ".."))
 REQUIREMENTS = os.path.join(DOCS_DIR, "requirements.txt")
-SPHINX_UPDATE_DIR = os.path.join(DEV_DIR, "update")
+SPHINX_UPDATE_DIR = os.path.join(SPHINX_DIR, "update")
 GITHUB_REPO = "canonical/sphinx-stack"
 GITHUB_API_BASE = f"https://api.github.com/repos/{GITHUB_REPO}"
 GITHUB_API_DEV_DIR = f"{GITHUB_API_BASE}/contents/docs/_dev"
