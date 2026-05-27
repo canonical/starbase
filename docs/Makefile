@@ -5,23 +5,23 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 
-DEV_DIR          ?= _dev
-SPHINX_OPTS      ?= -c . -d $(DEV_DIR)/.doctrees -j auto
-SPHINX_BUILD     ?= $(DOCS_VENVDIR)/bin/sphinx-build
-SPHINX_HOST      ?= 127.0.0.1
-SPHINX_PORT      ?= 8000
-SPHINX_AUTOBUILD_OPTS ?= -D=llms_txt_enabled=0
-DOCS_VENVDIR     ?= .venv
-DOCS_VENV        ?= $(DOCS_VENVDIR)/bin/activate
-DOCS_SOURCEDIR   ?= .
-DOCS_BUILDDIR    ?= _build
-DOCS_PDFPACKAGES ?= latexmk fonts-freefont-otf texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-font-utils texlive-lang-cjk texlive-xetex plantuml xindy tex-gyre dvipng
-DOCS_VOCAB       ?= $(DEV_DIR)/styles/config/vocabularies/Canonical
-VALE_DIR         ?= $(DOCS_VENVDIR)/lib/python*/site-packages/vale
-VALE_CONFIG      ?= $(DEV_DIR)/vale.ini
-PA11Y_CMD        ?= $(DEV_DIR)/node_modules/pa11y/bin/pa11y.js --config $(DEV_DIR)/pa11y.json
-CONFIRM_SUDO     ?= N
-CHECK_PATH       ?= $(filter-out $(DOCS_VENVDIR) $(DOCS_BUILDDIR),$(wildcard *))
+DEV_DIR               ?= _dev
+SPHINX_OPTS           ?= -c . -d $(DEV_DIR)/.doctrees -j auto
+SPHINX_BUILD          ?= $(DOCS_VENVDIR)/bin/sphinx-build
+SPHINX_HOST           ?= 127.0.0.1
+SPHINX_PORT           ?= 8000
+SPHINX_AUTOBUILD_OPTS ?= --ignore "../.venv/*" --ignore "reference/commands/*" -D=llms_txt_enabled=0
+DOCS_VENVDIR          ?= .venv
+DOCS_VENV             ?= $(DOCS_VENVDIR)/bin/activate
+DOCS_SOURCEDIR        ?= .
+DOCS_BUILDDIR         ?= _build
+DOCS_PDFPACKAGES      ?= latexmk fonts-freefont-otf texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-font-utils texlive-lang-cjk texlive-xetex plantuml xindy tex-gyre dvipng
+DOCS_VOCAB            ?= $(DEV_DIR)/styles/config/vocabularies/Canonical
+VALE_DIR              ?= $(DOCS_VENVDIR)/lib/python*/site-packages/vale
+VALE_CONFIG           ?= $(DEV_DIR)/vale.ini
+PA11Y_CMD             ?= $(DEV_DIR)/node_modules/pa11y/bin/pa11y.js --config $(DEV_DIR)/pa11y.json
+CONFIRM_SUDO          ?= N
+CHECK_PATH            ?= $(filter-out $(DOCS_VENVDIR) $(DOCS_BUILDDIR),$(wildcard *))
 
 # Put it first so that "make" without argument is like "make help".
 help:
