@@ -63,11 +63,12 @@ html_context = {
     # TODO: Change to your Discourse instance URL or leave empty.
     "discourse": "",
     # Your Mattermost channel URL
+    # TODO: Change to your Mattermost channel URL or leave empty.
     "mattermost": "https://chat.canonical.com/canonical/channels/documentation",
     # Your Matrix channel URL
     # TODO: Change to your Matrix channel URL or leave empty.
     "matrix": "https://matrix.to/#/#starcraft-development:ubuntu.com",
-    # Your documentation GitHub repository URL If set, links for viewing the
+    # Your documentation GitHub repository URL. If set, links for viewing the
     # documentation source files and creating GitHub issues are added at the bottom of
     # each page.
     # TODO: Change to your documentation GitHub repository URL or leave empty.
