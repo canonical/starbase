@@ -94,8 +94,6 @@ html_context = {
     },
 }
 
-#html_extra_path = []
-
 # TODO: To enable the edit button on pages, change the link to your public repository on
 # GitHub or Launchpad.
 html_theme_options = {
