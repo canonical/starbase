@@ -123,12 +123,16 @@ TODO
 
 7. Rewrite the README.
 
-8. If a Diataxis quadrant (tutorials, how-tos, references, explanations) doesn't yet
+8. Follow the instructions in the appropriate agents template - `AGENTS.app.md` for
+   craft apps and `AGENTS.lib.md` for craft libraries. Other projects (like starflow)
+   should start with `AGENTS.app.md` and customize it as-needed.
+
+9. If a Diataxis quadrant (tutorials, how-tos, references, explanations) doesn't yet
    have content, remove its landing page from the TOC and delete its card in
    `docs/index.rst`. You can re-index it when at least one document has been produced
    for it.
 
-9. Register the product's documentation on our custom domain on [Read the Docs for
+10. Register the product's documentation on our custom domain on [Read the Docs for
    Business](https://library.canonical.com/documentation/publish-on-read-the-docs)
 
-10. Delete `.github/README.md`.
+11. Delete `.github/README.md`, `AGENTS.app.md`, and `AGENTS.lib.md`.
