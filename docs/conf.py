@@ -27,6 +27,15 @@ project = "Starbase"
 # Author name; used in the default copyright statement in the page footer
 author = "Canonical Ltd."
 
+# Format the product name and version for the TOC and HTML title
+# TODO: When the product begins versioning, uncomment this block.
+# release = <starcraft>.__version__
+# if ".post" in release:
+#     release = "dev"
+# else:
+#     major, minor, *_ = release.split(".")
+#     release = f"{major}.{minor}"
+
 # The year in the copyright statement
 copyright = f"2023-{datetime.date.today().year}"
 
