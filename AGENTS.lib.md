@@ -4,7 +4,7 @@
 
      To complete this AGENTS.md file for your library:
      1. Replace instances of "Starbase" and "starbase" with the library name.
-     2. Complete the 'TODO' section in the overview.
+     2. Complete the 'TODO' sections.
      3. Rename to AGENTS.md.
      4. Delete AGENTS.app.md.
      5. Delete this comment.
@@ -31,7 +31,7 @@ library).
 ## Craft apps and libraries
 
 Starbase is used by craft apps, including but not limited to Charmcraft, Debcraft,
-Imagecraft, Rockcraft, and Snapcraft. The source code for these apps are at
+Imagecraft, Rockcraft, and Snapcraft. The source code for these apps is at
 https://github.com/canonical/<app>.
 
 Craft apps use starbase in conjunction with the following craft libraries:
@@ -47,7 +47,7 @@ Craft apps use starbase in conjunction with the following craft libraries:
 | `craft-providers`   | Build environment manager for LXD and Multipass                                               |
 | `craft-store`       | Store API client: upload, release, track management                                           |
 
-The source code for these libraries are at https://github.com/canonical/<library>.
+The source code for these libraries is at https://github.com/canonical/<library>.
 
 ## Development
 
@@ -65,8 +65,9 @@ make test-fast      # Fast tests only
 uv run pytest tests/unit/path/to/test_file.py::test_name  # run a specific test
 ```
 
+(TODO: delete this section if there are no spread tests)
 End-to-end tests (`tests/spread/`) use [spread](https://github.com/canonical/spread/)
-and require additional set up to run locally.
+and require additional setup to run locally.
 
 ### Formatting and linting
 

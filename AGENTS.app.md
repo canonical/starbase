@@ -43,10 +43,10 @@ Starbase is built on the following craft libraries:
 | `craft-providers`   | Build environment manager for LXD and Multipass                                               |
 | `craft-store`       | Store API client: upload, release, track management                                           |
 
-The source code for these libraries are at https://github.com/canonical/<library>.
+The source code for these libraries is at https://github.com/canonical/<library>.
 
 These libraries are used by other craft apps, including but not limited to Charmcraft,
-Debcraft, Imagecraft, Rockcraft, and Snapcraft. The source code for these apps are at
+Debcraft, Imagecraft, Rockcraft, and Snapcraft. The source code for these apps is at
 https://github.com/canonical/<app>.
 
 Fixes or features that are generic or would benefit other craft apps must be made in the
@@ -70,7 +70,7 @@ uv run pytest tests/unit/path/to/test_file.py::test_name  # run a specific test
 ```
 
 End-to-end tests (`tests/spread/`) use [spread](https://github.com/canonical/spread/)
-and require additional set up to run locally.
+and require additional setup to run locally.
 
 ### Formatting and linting
 

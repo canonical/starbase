@@ -11,7 +11,7 @@ and test infrastructure.
 This repository is an upstream repository for more than 20 Starcraft projects, such as
 Snapcraft, Rockcraft, craft-application, and craft-parts.
 
-The source code for these projects are at https://github.com/canonical/<project>.
+The source code for these projects is at https://github.com/canonical/<project>.
 
 Repos that use starbase track it as a git remote named `starbase` and periodically merge
 changes from `starbase/main`.
