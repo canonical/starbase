@@ -37,23 +37,11 @@ export UV_FROZEN := true
 .PHONY: help
 help: ## Show this help.
 	@printf "\e[1m%-30s\e[0m | \e[1m%s\e[0m\n" "Target" "Description"
-	printf "\e[2m%-30s + %-41s\e[0m\n" "------------------------------" "------------------------------------------------"
-	egrep -h '^[^:]+\: [^#]*##' $$(echo $(MAKEFILE_LIST) | tac --separator=' ') | sed -e 's/:[^#]*/ /' | sort -V | awk -F '[: ]*' \
-	'{
-		if ($$2 == "##")
-		{
-			$$1=sprintf(" %-28s", $$1);
-			$$2=" | ";
-			print $$0;
-		}
-		else
-		{
-			$$1=sprintf("  └ %-25s", $$1);
-			$$2=" | ";
-			$$3=sprintf(" └ %s", $$3);
-			print $$0;
-		}
-	}' | uniq
+	@printf "\e[2m%-30s + %-41s\e[0m\n" "------------------------------" "------------------------------------------------"
+	@egrep -h '^[^[:space:]][^:]+\:[^#]*##' $$(echo $(MAKEFILE_LIST) | tac --separator=' ' 2>/dev/null || echo $(MAKEFILE_LIST)) | \
+	sed -e 's/:[^#]*/ /' | sort -V | \
+	awk -F '[: ]*' '{ if ($$2 == "##") { $$1=sprintf(" %-28s", $$1); $$2=" | "; print $$0; } else { $$1=sprintf("  └ %-25s", $$1); $$2=" | "; $$3=sprintf(" └ %s", $$3); print $$0; } }' | \
+	uniq
 
 .PHONY: setup
 setup: install-uv _setup-docs _setup-lint _setup-tests setup-precommit install-build-deps  ## Set up a development environment
