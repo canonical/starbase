@@ -133,6 +133,6 @@ TODO
    for it.
 
 10. Register the product's documentation on our custom domain on [Read the Docs for
-   Business](https://library.canonical.com/documentation/publish-on-read-the-docs)
+    Business](https://library.canonical.com/documentation/publish-on-read-the-docs)
 
 11. Delete `.github/README.md`, `AGENTS.app.md`, and `AGENTS.lib.md`.
