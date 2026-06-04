@@ -78,8 +78,11 @@ make lint
 
 ### Documentation
 
-Documentation uses the [Diátaxis](https://diataxis.fr) framework and the
-[Sphinx Stack](https://github.com/canonical/sphinx-stack).
+Documentation uses the [Diátaxis](https://diataxis.fr) framework
+and the [Sphinx Stack](https://github.com/canonical/sphinx-stack).
+All documentation must follow the [Starcraft style
+guide](https://documentation.ubuntu.com/starflow/latest/how-to/starcraft-style-guide/)
+and the overall [Canonical style guide](https://documentation.ubuntu.com/style-guide/).
 
 ```bash
 make setup-docs

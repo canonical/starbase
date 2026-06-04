@@ -81,8 +81,11 @@ make lint
 
 ### Documentation
 
-Documentation uses the [Diátaxis](https://diataxis.fr) framework and the
-[Sphinx Stack](https://github.com/canonical/sphinx-stack).
+Documentation uses the [Diátaxis](https://diataxis.fr) framework
+and the [Sphinx Stack](https://github.com/canonical/sphinx-stack).
+All documentation must follow the [Starcraft style
+guide](https://documentation.ubuntu.com/starflow/latest/how-to/starcraft-style-guide/)
+and the overall [Canonical style guide](https://documentation.ubuntu.com/style-guide/).
 
 ```bash
 make setup-docs
@@ -97,6 +100,8 @@ make lint-docs
   configuration, APIs, defaults, or validation rules must be opt-in or gated behind a
   newer base. When modifying business logic, verify that existing behavior is preserved
   and explain how you verified it.
+    - Experimental features and development bases (`build-base: devel`) are not subject
+      to this requirement.
 - Make the smallest safe change necessary to resolve the issue. Avoid unrelated bug
   fixes, opportunistic cleanup, and refactoring unless required. The right amount of
   complexity is the minimum needed for the current task.
