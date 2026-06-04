@@ -62,6 +62,11 @@ TODO
        as you can to the structure of the [Security policy template](SECURITY.md). Be
        sure to follow the comments in the template closely.
 
+    6. `AGENTS.md` - Follow the instructions in the appropriate agents template -
+       `AGENTS.app.md` for craft apps and `AGENTS.lib.md` for craft libraries. Other
+       projects (like starflow) should start with `AGENTS.app.md` and customize it
+       as-needed.
+
 4. Run all the linters with `make lint`.
     1. `mypy`:
         - Mypy checks the same things as `ruff`'s `ANNXXX` checks, but `ruff`'s `noqa`
@@ -135,4 +140,4 @@ TODO
 10. Register the product's documentation on our custom domain on [Read the Docs for
     Business](https://library.canonical.com/documentation/publish-on-read-the-docs)
 
-11. Delete `.github/README.md`, `AGENTS.app.md`, and `AGENTS.lib.md`.
+11. Delete `.github/README.md`.
