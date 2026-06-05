@@ -11,7 +11,8 @@ and test infrastructure.
 This repository is an upstream repository for more than 20 Starcraft projects, such as
 Snapcraft, Rockcraft, craft-application, and craft-parts.
 
-The source code for these projects is at https://github.com/canonical/<project>.
+The source code for these projects is at
+https://github.com/canonical/<project-name-in-lowercase>.
 
 Repos that use starbase track it as a git remote named `starbase` and periodically merge
 changes from `starbase/main`.
@@ -61,6 +62,9 @@ make lint-docs
 - Never speculate about code you haven't inspected.
 - Follow the project's existing conventions regarding style, docstrings, logging, and
   comments.
+- Comments should explain complex business logic, non-obvious algorithms, regex, and
+  other "gotchas". Comments should brief, explain "why" not "how", and be helpful for
+  future maintainers.
 - Update relevant documentation and release notes to reflect code changes.
 
 ## Processes
