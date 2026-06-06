@@ -14,7 +14,7 @@ possible, so when changes come we don't have to recreate them. The process isn't
 
 First, diff the Starbase history between now and the last time the subproject was updated in this repository. In Starbase, here's one way to check which docs-related files were changed:
 
-```
+```bash
 git --no-pager diff <commit> --name-only -- docs/ .readthedocs.yaml common.mk Makefile
 ```
 
