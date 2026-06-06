@@ -35,7 +35,7 @@ docs = [
 # https://warthogs.atlassian.net/browse/DOCPR-2387
 docs-sphinx-stack = [
     "canonical-sphinx~=0.6",
-    "myst-parser~=4.0",
+    "myst-parser~=5.1",
     "packaging~=26.1",
     "rst2html>=2020.7.4",
     "sphinx-autobuild>=2024.10.3",
