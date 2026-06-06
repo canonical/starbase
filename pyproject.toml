@@ -41,7 +41,7 @@ docs-sphinx-stack = [
     "sphinx-autobuild>=2024.10.3",
     # "sphinx-config-options~=0.1",
     # "sphinx-contributor-listing~=0.1",
-    "sphinx-design==0.6.1",
+    "sphinx-design==0.7.0",
     # "sphinx-filtered-toctree~=0.1",
     # "sphinx-last-updated-by-git~=0.3",
     "sphinx-llm~=0.4",
