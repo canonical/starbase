@@ -12,17 +12,27 @@ describes the officially-supported features and provides guidance for customizin
 The goal is to override the build configuration of the Sphinx Stack as little as
 possible, so when changes come we don't have to recreate them. The process isn't automatic.
 
-First, diff the Starbase history between now and the last time the subproject was updated in this repository. In Starbase, here's one way to check which docs-related files were changed:
+### Gather the changes
+
+You first need the recent history of the standard documentation implementation in Starbase. We'll provide one way you could gather it.
+
+Inside Starbase, find the commit that most recently updated the version of the Sphinx Stack:
 
 ```bash
-git --no-pager diff <commit> --name-only -- docs/ .readthedocs.yaml common.mk Makefile
+git log --grep "sphinx stack" -i
 ```
 
-It's typically reliable to replace `<commit>` with a commit SHA dated to right before the subproject was last updated.
+Copy the commit SHA. Then, collect the list of Sphinx Stack files that were changed between that commit and now:
 
-Then, diff or copy those files from Starbase to this subproject.
+```bash
+git --no-pager diff <commit>~1 --name-only -- docs/ .readthedocs.yaml common.mk Makefile
+```
 
-Go into the Sphinx Stack changelog to see what settings and values need updating.
+### Apply the changes
+
+Next, bring the updates into the subproject. It's simplest to copy over the files, and then review the resulting Git diff. It's likely some of the changes will erase sections of the files, especially in changes to the documents themsleves. You'll review each change line-by-line in any case, so you can restore any unwanted deletions as you work through them.
+
+As you review, look for instances of `Starcraft` and `TODO` comments for places where the code needs customizing. If you can't decide on how to configure a change, consult the [Sphinx Stack release notes](https://documentation.ubuntu.com/sphinx-stack/latest/) for idiomatic documentation of the feature.
 
 In `pyproject.toml`, remove everything in the `docs-sphinx-stack` group. Then, sync the docs dependencies to the parent project:
 
