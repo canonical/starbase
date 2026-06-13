@@ -40,7 +40,7 @@ def test_version():
 
 
 @pytest.mark.parametrize(
-    "version,major_minor",  # NOQA: PT006
+    ("version", "major_minor"),
     [
         ("9.0.0", "9.0"),  # Tagged
         ("9.0.0-23-gc2a9d6349", "9.0"),  # Tagged + new commits
