@@ -25,10 +25,11 @@ import starcraft
 def get_major_minor_version():
     """Fixture function that duplicates version trimming in docs/conf.py."""
 
-    def _trim(version):
-        expression = re.compile(r"\d+\.\d+")
+    def _trim(version: str) -> str:
+        match = re.match(r"\d+\.\d+", version)
+        assert match is not None
 
-        return expression.match(version).group()
+        return match.group()
 
     return _trim
 
@@ -46,6 +47,6 @@ def test_version():
         ("0.0.post836+g494e37055.d20260612", "0.0"),  # Untagged
     ],
 )
-def test_version_tagged(version, major_minor, get_major_minor_version):
+def test_version_major_minor(version, major_minor, get_major_minor_version):
     """Test the version-to-major-minor function."""
     assert get_major_minor_version(version) == major_minor
