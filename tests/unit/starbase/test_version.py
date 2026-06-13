@@ -23,7 +23,7 @@ import starcraft
 
 @pytest.fixture
 def get_major_minor_version():
-    """Fixture method that duplicates version trimming in docs/conf.py."""
+    """Fixture function that duplicates version trimming in docs/conf.py."""
 
     def _trim(version):
         expression = re.compile(r"\d+\.\d+")
