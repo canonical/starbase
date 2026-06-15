@@ -8,6 +8,8 @@ SOURCES=$(wildcard *.py) $(PROJECT) tests
 export DOCS_BUILDDIR ?= _build
 export DOCS_VENVDIR ?= ../.venv
 export VALE_DIR ?= $(DOCS_VENVDIR)/lib/python*/site-packages/vale
+export DEV_DIR ?= docs/_dev
+export VALE_CONFIG ?= $(DEV_DIR)/vale.ini
 export SPHINX_AUTOBUILD_OPTS ?= --ignore "$(DOCS_VENVDIR)/*" --ignore "reference/commands/*" -D=llms_txt_enabled=0
 
 ifneq ($(OS),Windows_NT)
@@ -296,8 +298,10 @@ docs-setup: setup-docs
 # we pass a null dir instead.
 .PHONY: docs-clean
 docs-clean:  ##- Clean the temporary files used in documentation
-	VENVDIR=$(mktemp)
-	$(MAKE) -C docs clean --no-print-directory
+	$(MAKE) -C docs clean-doc --no-print-directory
+	rm -rf $(DEV_DIR)/node_modules/
+	rm -rf $(DEV_DIR)/styles
+	rm -rf $(VALE_CONFIG)
 
 # Override for `help` target in docs project
 .PHONY: docs-help
