@@ -299,7 +299,7 @@ docs-clean:  ##- Clean the temporary files used in documentation
 	$(MAKE) -C docs clean-doc --no-print-directory
 	rm -rf docs/_dev/node_modules/
 	rm -rf docs/_dev/styles
-	rm -rf docs/_dev/vale.ini
+	rm -f docs/_dev/vale.ini
 
 # Override for `help` target in docs project
 .PHONY: docs-help
