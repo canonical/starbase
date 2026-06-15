@@ -292,8 +292,7 @@ endif
 .PHONY: docs-setup
 docs-setup: setup-docs
 
-# Override for `clean` target in docs project. We don't want to touch `.venv`, so
-# we pass a null dir instead.
+# Override for `clean` target in docs project. We don't want to touch `.venv`.
 .PHONY: docs-clean
 docs-clean:  ##- Clean the temporary files used in documentation
 	$(MAKE) -C docs clean-doc --no-print-directory
