@@ -7,8 +7,8 @@ SOURCES=$(wildcard *.py) $(PROJECT) tests
 # docs Makefile.
 export DOCS_BUILDDIR ?= _build
 export DOCS_VENVDIR ?= ../.venv
-export VALE_DIR ?= $(DOCS_VENVDIR)/lib/python*/site-packages/vale
 export DEV_DIR ?= docs/_dev
+export VALE_DIR ?= $(DOCS_VENVDIR)/lib/python*/site-packages/vale
 export VALE_CONFIG ?= $(DEV_DIR)/vale.ini
 export SPHINX_AUTOBUILD_OPTS ?= --ignore "$(DOCS_VENVDIR)/*" --ignore "reference/commands/*" -D=llms_txt_enabled=0
 
