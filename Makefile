@@ -21,7 +21,7 @@ UV_TICS_GROUPS := "--group=tics"
 include common.mk
 
 .PHONY: format
-format: format-ruff format-codespell format-prettier format-pre-commit  ## Run all automatic formatters
+format: format-ruff format-codespell format-prettier format-shell format-pre-commit  ## Run all automatic formatters
 
 .PHONY: lint
 lint: lint-code lint-docs lint-twine lint-uv-lockfile lint-actions  ## Run all linters

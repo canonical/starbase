@@ -117,6 +117,13 @@ format-pre-commit:  ##- Format the entire repository using pre-commit
 format-prettier: install-npm  ##- Format files with prettier
 	$(PRETTIER) --write $(PRETTIER_FILES)
 
+.PHONY: format-shell
+format-shell: install-shfmt ##- Format shell scripts
+	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
+	@# so explicitly filter them out
+	git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shfmt -w
+
+
 .PHONY: lint-ruff
 lint-ruff: install-ruff  ##- Lint with ruff
 ifneq ($(CI),)
@@ -414,6 +421,18 @@ else ifneq ($(shell which brew),)
 else
 	$(warning Shellcheck not installed. Please install it yourself.)
 endif
+
+.PHONY: install-shfmt
+install-shfmt:
+ifneq ($(shell which shfmt),)
+else ifneq ($(shell which snap),)
+	sudo snap install shfmt
+else ifneq ($(shell which brew),)
+	brew install shfmt
+else
+	$(warning shfmt not installed. Please install it yourself.)
+endif
+
 
 .PHONY: install-ty
 install-ty:
