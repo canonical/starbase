@@ -256,10 +256,11 @@ test-find-slow:  ##- Identify slow tests. Set cutoff time in seconds with SLOW_C
 # Alias for `html` target in docs project. We want to use our own `.venv`, so we
 # replace it.
 .PHONY: docs
-docs: docs-install  ## Render the documentation to disk
+docs:  ## Render the documentation to disk
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
+	$(MAKE) docs-install
 	$(MAKE) -C docs html --no-print-directory
 ifneq ($(CI),)
 	@echo ::endgroup::
@@ -267,20 +268,15 @@ endif
 
 # Alias for `serve` target in docs project
 .PHONY: docs-auto
-docs-auto: docs-install  ##- Render the documentation in a live session
+docs-auto:  ##- Render the documentation in a live session
+	$(MAKE) docs-install
 	$(MAKE) -C docs run --no-print-directory
 
 # Override for `install` target in docs project. We still need the Vale setup, so we
 # run that after the parent docs setup.
 .PHONY: docs-install
 docs-install: _setup-docs  ##- Set up documentation packages
-ifneq ($(CI),)
-	@echo ::group::$@
-endif
 	$(MAKE) -C docs vale-install --no-print-directory
-ifneq ($(CI),)
-	@echo ::endgroup::
-endif
 
 # Alias for `setup-docs`
 .PHONY: docs-setup
@@ -312,15 +308,23 @@ docs-lint-md:
 
 # Passthrough for the rest of the targets in docs project
 .PHONY: docs-%
-docs-%: docs-install
-	$(MAKE) -C docs $(@:docs-%=%) --no-print-directory
-
-# Run our own docs linting, then pass to the docs
-.PHONY: docs-lint
-docs-lint: docs-install  ##- Lint the documentation
+docs-%:
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
+	$(MAKE) docs-install
+	$(MAKE) -C docs $(@:docs-%=%) --no-print-directory
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
+
+# Run our own docs linting, then pass to the docs
+.PHONY: docs-lint
+docs-lint:  ##- Lint the documentation
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
+	$(MAKE) docs-install
 	uv run $(UV_DOCS_GROUPS) sphinx-lint docs \
 	--ignore docs/_dev \
 	--ignore docs/_build \
