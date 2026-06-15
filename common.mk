@@ -276,7 +276,17 @@ docs-auto:  ##- Render the documentation in a live session
 # run that after the parent docs setup.
 .PHONY: docs-install
 docs-install: _setup-docs  ##- Set up documentation packages
+ifneq ($(CI),)
+ifeq ($(MAKELEVEL),0)
+	@echo ::group::$@
+endif
+endif
 	$(MAKE) -C docs vale-install --no-print-directory
+ifneq ($(CI),)
+ifeq ($(MAKELEVEL),0)
+	@echo ::endgroup::
+endif
+endif
 
 # Alias for `setup-docs`
 .PHONY: docs-setup
