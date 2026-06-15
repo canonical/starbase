@@ -65,7 +65,7 @@ setup-lint: _setup-lint  ##- Set up a linting-only environment
 	uv sync $(UV_LINT_GROUPS)
 
 .PHONY: _setup-lint
-_setup-lint: install-uv install-shellcheck install-pyright install-lint-build-deps install-actionlint
+_setup-lint: install-uv install-shellcheck install-shfmt install-pyright install-lint-build-deps install-actionlint
 
 .PHONY: setup-tests
 setup-tests: _setup-tests ##- Set up a testing environment without linters
@@ -121,7 +121,11 @@ format-prettier: install-npm  ##- Format files with prettier
 format-shell: install-shfmt ##- Format shell scripts
 	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
 	@# so explicitly filter them out
-	git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shfmt -w
+	files=$$(git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d:); \
+	if [ -n "$$files" ]; then \
+		shfmt -w $$files; \
+	fi
+
 
 
 .PHONY: lint-ruff
@@ -184,6 +188,22 @@ lint-uv-lockfile: install-uv  ##- Check that uv.lock matches expectations from p
 	unset UV_FROZEN
 	uv lock --check
 
+.PHONY: lint-shell
+lint-shell: install-shfmt  ##- Lint shell script formatting
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
+	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
+	@# so explicitly filter them out
+	files=$$(git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d:); \
+	if [ -n "$$files" ]; then \
+		shfmt --diff $$files; \
+	fi
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
+
+
 .PHONY: lint-shellcheck
 lint-shellcheck:  ##- Lint shell scripts
 ifneq ($(CI),)
@@ -195,6 +215,7 @@ endif
 ifneq ($(CI),)
 	@echo ::endgroup::
 endif
+
 
 .PHONY: lint-prettier
 lint-prettier: install-npm  ##- Lint files with prettier
