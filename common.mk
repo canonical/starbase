@@ -121,10 +121,7 @@ format-prettier: install-npm  ##- Format files with prettier
 format-shell: install-shfmt ##- Format shell scripts
 	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
 	@# so explicitly filter them out
-	files=$$(git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d:); \
-	if [ -n "$$files" ]; then \
-		shfmt -w $$files; \
-	fi
+	git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shfmt -w
 
 
 
@@ -195,10 +192,7 @@ ifneq ($(CI),)
 endif
 	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
 	@# so explicitly filter them out
-	files=$$(git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d:); \
-	if [ -n "$$files" ]; then \
-		shfmt --diff $$files; \
-	fi
+	git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shfmt --diff
 ifneq ($(CI),)
 	@echo ::endgroup::
 endif
