@@ -121,9 +121,7 @@ format-prettier: install-npm  ##- Format files with prettier
 format-shell: install-shfmt ##- Format shell scripts
 	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
 	@# so explicitly filter them out
-	git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shfmt -w
-
-
+	git ls-files -z | xargs -0 sh -c 'for f; do case "$$f" in *.sh.j2) continue;; esac; file --mime-type -Nn -- "$$f" | grep -q shellscript && printf "%s\0" "$$f"; done' -- | xargs -0 sh -c '[ $$# -eq 0 ] || exec shfmt -w "$$@"' --
 
 .PHONY: lint-ruff
 lint-ruff: install-ruff  ##- Lint with ruff
@@ -192,11 +190,10 @@ ifneq ($(CI),)
 endif
 	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
 	@# so explicitly filter them out
-	git ls-files | grep -vE "\.sh\.j2$$" | file --mime-type -Nnf- | grep shellscript | cut -f1 -d: | xargs -r shfmt --diff
+	git ls-files -z | xargs -0 sh -c 'for f; do case "$$f" in *.sh.j2) continue;; esac; file --mime-type -Nn -- "$$f" | grep -q shellscript && printf "%s\0" "$$f"; done' -- | xargs -0 sh -c '[ $$# -eq 0 ] || exec shfmt --diff "$$@"' --
 ifneq ($(CI),)
 	@echo ::endgroup::
 endif
-
 
 .PHONY: lint-shellcheck
 lint-shellcheck:  ##- Lint shell scripts
