@@ -117,8 +117,8 @@ format-pre-commit:  ##- Format the entire repository using pre-commit
 format-prettier: install-npm  ##- Format files with prettier
 	$(PRETTIER) --write $(PRETTIER_FILES)
 
-.PHONY: format-shell
-format-shell: install-shfmt ##- Format shell scripts
+.PHONY: format-shfmt
+format-shfmt: install-shfmt ##- Format shell scripts
 	@# jinja2 shell script templates are mistakenly counted as "true" shell scripts due to their shebang,
 	@# so explicitly filter them out
 	git ls-files -z | xargs -0 sh -c 'for f; do case "$$f" in *.sh.j2) continue;; esac; file --mime-type -Nn -- "$$f" | grep -q shellscript && printf "%s\0" "$$f"; done' -- | xargs -0 sh -c '[ $$# -eq 0 ] || exec shfmt -w "$$@"' --
@@ -183,8 +183,8 @@ lint-uv-lockfile: install-uv  ##- Check that uv.lock matches expectations from p
 	unset UV_FROZEN
 	uv lock --check
 
-.PHONY: lint-shell
-lint-shell: install-shfmt  ##- Lint shell script formatting
+.PHONY: lint-shfmt
+lint-shfmt: install-shfmt  ##- Lint shell script formatting
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
@@ -444,7 +444,6 @@ else ifneq ($(shell which brew),)
 else
 	$(warning shfmt not installed. Please install it yourself.)
 endif
-
 
 .PHONY: install-ty
 install-ty:
