@@ -17,6 +17,8 @@ readme = { file = "README.md", content-type = "text/markdown" }
 starcraft-hello = "starcraft:hello"
 
 [dependency-groups]
+# Applications should avoid CVEs of direct dependencies in 'dependency-groups'.
+
 lint = [
     # Left empty for scaffolding and Makefile compatibility
 ]
@@ -75,7 +77,13 @@ tics = ["flake8", "pylint"]
 
 [tool.uv]
 constraint-dependencies = [
-    # Basic constraints to allow --resolution=lowest
+    # Basic constraints to allow --resolution=lowest.
+    #
+    # Libraries should avoid CVEs in direct and transient dependencies in this section.
+    # This allows standalone builds to avoid CVEs while not placing undue constraints on
+    # downstream users of the library.
+    #
+    # Applications should avoid CVEs of transient dependencies in this section.
     "cffi>=1.15",
     "iniconfig>=1.1.0",
     "httplib2>=0.20.0",
