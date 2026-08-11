@@ -109,7 +109,9 @@ html_theme_options = {
   "source_edit_link": "https://github.com/canonical/starbase",
 }
 
-slug = "craft-parts"
+# The version slug passed to the sphinx-notfound-page extenssion
+# TODO: Set this to the project's RTD slug
+slug = "starbase"
 
 
 #########################
