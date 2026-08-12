@@ -68,8 +68,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ github.ref_name }}
-        # Use the gh CLI directly instead of a third-party action, since the
-        # runner already provides it and it covers our needs. The tag name is
-        # passed via an environment variable rather than interpolated
-        # directly into the script to avoid shell/template injection.
         run: gh release create "$RELEASE_TAG" --generate-notes -- *.whl *.tar.gz
