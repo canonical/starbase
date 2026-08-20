@@ -27,21 +27,13 @@ project = "Starbase"
 # Author name; used in the default copyright statement in the page footer
 author = "Canonical Ltd."
 
-# Format the product name and version for the TOC and HTML title
-# TODO: When the product begins versioning, uncomment this block.
-# release = <starcraft>.__version__
-# if ".post" in release:
-#     release = "dev"
-# else:
-#     major, minor, *_ = release.split(".")
-#     release = f"{major}.{minor}"
+# Version string in sidebar
+# TODO: Uncomment and replace 'starcraft' with the product's main module on release
+# major, minor, *_ = starcraft.__version__.split(".")
+# release = "dev" if os.environ.get("READTHEDOCS_VERSION") == "latest" else f"{major}.{minor}"
 
 # The year in the copyright statement
 copyright = f"2023-{datetime.date.today().year}"
-
-# Sidebar documentation title
-# To disable the title, set it to an empty string.
-html_title = project + " documentation"
 
 # Documentation website URL
 ogp_site_url = "https://canonical-starbase.readthedocs-hosted.com/"
