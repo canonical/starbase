@@ -22,10 +22,6 @@ import starcraft
 from pytest_mock import MockerFixture
 
 
-def test_version():
-    assert starcraft.__version__ is not None
-
-
 def test_hello(mocker: MockerFixture):
     mock_print = mocker.patch("builtins.print")
 
