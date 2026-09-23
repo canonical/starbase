@@ -40,9 +40,9 @@ jobs:
         uses: taiki-e/install-action@7623a79cdfecb99d681017af368ca353d9f49bb5 # v2
         with:
           tool: |
-            shellcheck@v0.11.0
-            shfmt@v3.14.1
-            tombi@v1.5.5
+            shellcheck
+            shfmt
+            tombi
           fallback: none
 
       - name: Install system dependencies
@@ -53,12 +53,10 @@ jobs:
             libxslt1-dev
 
       - name: Install actionlint
-        env:
-          ACTIONLINT_VERSION: v1.7.12
         run: |
           mkdir -p "$HOME/.local/bin"
-          curl --fail --location --silent --show-error \
-            "https://github.com/rhysd/actionlint/releases/download/${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION#v}_linux_amd64.tar.gz" \
+          actionlint_url="$(python3 -c 'import json, urllib.request; req = urllib.request.Request("https://api.github.com/repos/rhysd/actionlint/releases/latest", headers={"Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}); release = json.load(urllib.request.urlopen(req)); print(next(asset["browser_download_url"] for asset in release["assets"] if asset["name"].endswith("linux_amd64.tar.gz")))' )"
+          curl --fail --location --silent --show-error "$actionlint_url" \
             | tar -xz -C "$HOME/.local/bin" actionlint
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
