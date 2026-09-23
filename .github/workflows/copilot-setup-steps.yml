@@ -39,16 +39,8 @@ jobs:
             shellcheck \
             shfmt
 
-      - name: Install standalone tools
-        run: |
-          uv tool install codespell
-          uv tool install pyright
-          uv tool install ruff
-          uv tool install tombi
-          uv tool install ty
-          go install github.com/rhysd/actionlint/cmd/actionlint@latest
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          echo "$HOME/go/bin" >> "$GITHUB_PATH"
+      - name: Prepare git configuration
+        run: git config --local --unset-all core.hooksPath || true
 
-      - name: Install project dependencies
-        run: uv sync --group=dev --group=lint --group=types --group=docs
+      - name: Set up repository tooling
+        run: make setup
