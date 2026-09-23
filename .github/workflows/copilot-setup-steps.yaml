@@ -53,11 +53,16 @@ jobs:
             libxslt1-dev
 
       - name: Install actionlint
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p "$HOME/.local/bin"
-          actionlint_url="$(python3 -c 'import json, urllib.request; req = urllib.request.Request("https://api.github.com/repos/rhysd/actionlint/releases/latest", headers={"Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}); release = json.load(urllib.request.urlopen(req)); print(next(asset["browser_download_url"] for asset in release["assets"] if asset["name"].endswith("linux_amd64.tar.gz")))' )"
-          curl --fail --location --silent --show-error "$actionlint_url" \
-            | tar -xz -C "$HOME/.local/bin" actionlint
+          gh release download \
+            --repo rhysd/actionlint \
+            --pattern 'actionlint_*_linux_amd64.tar.gz' \
+            --output /tmp/actionlint.tar.gz \
+            --clobber
+          tar -xzf /tmp/actionlint.tar.gz -C "$HOME/.local/bin" actionlint
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Prepare git configuration
