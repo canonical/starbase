@@ -40,9 +40,12 @@ jobs:
         uses: taiki-e/install-action@7623a79cdfecb99d681017af368ca353d9f49bb5 # v2
         with:
           tool: |
+            osv-scanner
+            prek
             shellcheck
             shfmt
             tombi
+            zizmor
           fallback: none
 
       - name: Install system dependencies
