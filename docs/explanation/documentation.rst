@@ -17,6 +17,8 @@ Documentation system and process
 Starcraft practices docs-as-code. The document source files are written in
 reStructuredText markup and kept inside the Starcraft source code. Like the rest of the
 code, the documents are version-controlled in a Git repository and hosted on GitHub.
+The repository enforces Unix (LF) line endings for all text files, including reStructuredText
+sources.
 
 The project uses Sphinx to compile the document sources into a static website of HTML
 web pages. The published documentation is hosted on the Read the Docs platform.
