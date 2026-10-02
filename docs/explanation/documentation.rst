@@ -25,6 +25,8 @@ Every time the source code is changed on GitHub, the documentation for that stat
 software is built and published. This is how a new copy of the documentation is provided
 for each release.
 
+Test for Windows line endings when using the web editor.
+
 Writing and editing in the docs-as-code style follows a write-build-preview loop.
 
 The Starcraft maintainers try and review every PR in a timely manner, typically within a
