@@ -65,7 +65,7 @@ setup-lint: _setup-lint  ##- Set up a linting-only environment
 	uv sync $(UV_LINT_GROUPS)
 
 .PHONY: _setup-lint
-_setup-lint: install-uv install-shellcheck install-shfmt install-pyright install-lint-build-deps install-actionlint
+_setup-lint: install-uv install-shellcheck install-shfmt install-pyright install-lint-build-deps install-actionlint install-prettier
 
 .PHONY: setup-tests
 setup-tests: _setup-tests ##- Set up a testing environment without linters
@@ -114,7 +114,7 @@ format-pre-commit:  ##- Format the entire repository using pre-commit
 	uv tool run pre-commit run
 
 .PHONY: format-prettier
-format-prettier: install-npm  ##- Format files with prettier
+format-prettier: install-prettier  ##- Format files with prettier
 	$(PRETTIER) --write $(PRETTIER_FILES)
 
 .PHONY: format-shfmt
@@ -213,7 +213,7 @@ endif
 
 
 .PHONY: lint-prettier
-lint-prettier: install-npm  ##- Lint files with prettier
+lint-prettier: install-prettier  ##- Lint files with prettier
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
@@ -507,3 +507,7 @@ else ifneq ($(shell which brew),)
 else
 	$(error npm not installed. Please install it yourself.)
 endif
+
+.PHONY: install-prettier
+install-prettier: install-npm
+	$(PRETTIER) --version > /dev/null
