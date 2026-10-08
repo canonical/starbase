@@ -74,7 +74,7 @@ jobs:
         with:
           name: pypi-packages
       - name: Release
-        # Only actually push to pypi when we're on a tag.
+        # Only actually publish the Github release when we're on a tag.
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         env:
           GH_REPO: ${{ github.repository }}
