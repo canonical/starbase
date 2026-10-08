@@ -24,6 +24,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Fetch tag annotations
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           # Note: we fetch the tags here instead of using actions/checkout's "fetch-tags"
           # because of https://github.com/actions/checkout/issues/1467
