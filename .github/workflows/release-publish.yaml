@@ -11,6 +11,7 @@ on:
 
 jobs:
   source-wheel:
+    if: github.event_name == 'push'
     runs-on: [self-hosted, medium, linux]
     permissions:
       contents: read
