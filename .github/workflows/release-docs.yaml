@@ -78,12 +78,11 @@ jobs:
 
       - name: Create redirects
         run: |
-          API="https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/redirects/"
-          
           create_redirect() {
             curl -fX POST \
               -H "Authorization: Token $RTD_TOKEN" -H "Content-Type: application/json" \
-              -d "{\"from_url\": \"/$1/*\", \"to_url\": \"/$MAJOR/:splat\", \"type\": \"exact\", \"force\": true}" "$API"
+              -d "{\"from_url\": \"/$1/*\", \"to_url\": \"/$MAJOR/:splat\", \"type\": \"exact\", \"force\": true}" \
+              "https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/redirects/"
           }
           
           [[ $PATCH == 0 ]] && create_redirect "$MAJOR.$MINOR"
