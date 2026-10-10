@@ -1,0 +1,89 @@
+name: Documentation release
+on:
+  push:
+    tags:
+      # These tags should be protected, remember to enable the rule:
+      # https://github.com/canonical/starbase/settings/tag_protection
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  docs-release:
+    runs-on: [self-hosted]
+    permissions:
+      contents: write
+    env:
+      RTD_PROJECT: ${{ vars.RTD_PROJECT }}
+      RTD_TOKEN: ${{ secrets.RTD_TOKEN }}
+    steps:
+      - name: Parse version
+        run: |
+          IFS='.' read -r MAJOR MINOR PATCH <<< "${{ github.ref_name }}"
+          echo "MAJOR=$MAJOR" >> "$GITHUB_ENV"
+          echo "MINOR=$MINOR" >> "$GITHUB_ENV"
+          echo "PATCH=$PATCH" >> "$GITHUB_ENV"
+          
+          if [[ $PATCH == 0 && $MINOR != 0 ]]; then
+            echo "IS_MINOR=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Create hotfix branch
+        if: env.PATCH == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="hotfix/$MAJOR.$MINOR"
+          SHA="${{ github.sha }}"
+          curl -sfX POST -H "Authorization: Token $GH_TOKEN" -H "Content-Type: application/json" \
+            -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"$SHA\"}" \
+            "https://api.github.com/repos/${{ github.repository }}/git/refs" 2>/dev/null || \
+          curl -sfX PATCH -H "Authorization: Token $GH_TOKEN" -H "Content-Type: application/json" \
+            -d "{\"sha\":\"$SHA\",\"force\":true}" \
+            "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/$BRANCH"
+
+      - name: Sync RTD versions
+        if: env.PATCH == '0'
+        run: |
+          curl \
+            -fX POST \
+            -H "Authorization: Token $RTD_TOKEN" \
+            "https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/sync-versions/"
+
+      - name: Manage RTD versions
+        if: env.PATCH == '0'
+        run: |
+          API="https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/versions"
+          
+          # For minor releases, rename and deactivate the outgoing major version
+          if [[ $IS_MINOR == true ]] && curl -sf -H "Authorization: Token $RTD_TOKEN" "$API/$MAJOR/" >/dev/null; then
+            PREV_MINOR=$((MINOR - 1))
+            curl -fX PATCH \
+              -H "Authorization: Token $RTD_TOKEN" -H "Content-Type: application/json" \
+              -d "{\"slug\": \"$MAJOR.$PREV_MINOR\", \"active\": false}" \
+              "$API/$MAJOR/"
+          fi
+          
+          # Update new version slug to major and activate
+          curl -fsS --retry 10 --retry-delay 6 --retry-all-errors -X PATCH \
+            -H "Authorization: Token $RTD_TOKEN" -H "Content-Type: application/json" \
+            -d "{\"slug\": \"$MAJOR\", \"active\": true}" \
+            "$API/hotfix-$MAJOR.$MINOR/"
+
+      - name: Update project default version
+        if: env.PATCH == '0'
+        run: |
+          curl -fX PATCH \
+            -H "Authorization: Token $RTD_TOKEN" -H "Content-Type: application/json" \
+            -d "{\"default_version\": \"$MAJOR\"}" \
+            "https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/"
+
+      - name: Create redirects
+        run: |
+          create_redirect() {
+            curl -fX POST \
+              -H "Authorization: Token $RTD_TOKEN" -H "Content-Type: application/json" \
+              -d "{\"from_url\": \"/$1/*\", \"to_url\": \"/$MAJOR/:splat\", \"type\": \"exact\", \"force\": true}" \
+              "https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/redirects/"
+          }
+          
+          [[ $PATCH == 0 ]] && create_redirect "$MAJOR.$MINOR"
+          create_redirect "$MAJOR.$MINOR.$PATCH"
