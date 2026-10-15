@@ -16,8 +16,10 @@ jobs:
       RTD_TOKEN: ${{ secrets.RTD_TOKEN }}
     steps:
       - name: Parse version
+        env:
+          REF_NAME: ${{ github.ref_name }}
         run: |
-          IFS='.' read -r MAJOR MINOR PATCH <<< "${{ github.ref_name }}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$REF_NAME"
           {
             echo "MAJOR=$MAJOR"
             echo "MINOR=$MINOR"
@@ -32,13 +34,15 @@ jobs:
         if: env.PATCH == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SHA: ${{ github.sha }}
         run: |
           BRANCH="hotfix/$MAJOR.$MINOR"
-          API="https://api.github.com/repos/${{ github.repository }}"
+          API="https://api.github.com/repos/$REPOSITORY"
 
           if ! curl -sf -H "Authorization: Token $GH_TOKEN" "$API/git/refs/heads/$BRANCH" >/dev/null; then
             curl -fX POST -H "Authorization: Token $GH_TOKEN" -H "Content-Type: application/json" \
-              -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"${{ github.sha }}\"}" \
+              -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"$SHA\"}" \
               "$API/git/refs"
           fi
 
