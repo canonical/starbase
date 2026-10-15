@@ -53,4 +53,7 @@ make docs-lint
 make docs-linkcheck
 ```
 
+Link checking reaches the network, so expect it to be slow and to fail on an
+unreachable external site.
+
 Check that the new and updated features listed in the Sphinx Stack changelog work.

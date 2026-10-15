@@ -24,6 +24,7 @@ include common.mk
 format: format-ruff format-codespell format-prettier format-shfmt format-tombi format-pre-commit  ## Run all automatic formatters
 
 .PHONY: lint
+# Every linter is its own target so that CI can give them separate runners.
 lint: lint-code lint-docs lint-twine lint-uv-lockfile lint-actions  ## Run all linters
 
 .PHONY: lint-code
