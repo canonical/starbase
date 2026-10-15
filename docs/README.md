@@ -44,12 +44,13 @@ make docs-setup
 uv add -r docs/requirements.txt --group docs-sphinx-stack
 ```
 
-For safety, test the three main doc commands:
+For safety, test the four main doc commands:
 
 ```bash
 make docs
 make docs-auto
 make docs-lint
+make docs-linkcheck
 ```
 
 Check that the new and updated features listed in the Sphinx Stack changelog work.
