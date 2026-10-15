@@ -11,7 +11,7 @@ on:
 
 jobs:
   source-wheel:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+    if: false
     runs-on: [self-hosted, medium, linux]
     permissions:
       contents: read
@@ -24,7 +24,6 @@ jobs:
         with:
           persist-credentials: false
       - name: Fetch tag annotations
-        if: ${{ github.event_name != 'pull_request' }}
         run: |
           # Note: we fetch the tags here instead of using actions/checkout's "fetch-tags"
           # because of https://github.com/actions/checkout/issues/1467
@@ -43,6 +42,7 @@ jobs:
   # that use starbase. Please ensure this job is excluded from merges/PRs
   # originating from starbase unless explicitly required for a specific app.
   pypi:
+    if: false
     needs: ["source-wheel"]
     runs-on: [self-hosted, amd64, medium, linux]
     permissions:
@@ -56,12 +56,12 @@ jobs:
           path: dist/
       - name: Publish to pypi
         # Only actually push to pypi when we're on a tag.
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         # Note: this action uses PyPI's support for Trusted Publishers
         # It needs a configuration on the PyPI project - see:
         # https://docs.pypi.org/trusted-publishers/adding-a-publisher/#github-actions
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # release/v1
   github-release:
+    if: false
     needs: ["source-wheel"]
     runs-on: [self-hosted, medium, linux]
     permissions:
@@ -73,7 +73,6 @@ jobs:
           name: pypi-packages
       - name: Release
         # Only actually publish the Github release when we're on a tag.
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         env:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
