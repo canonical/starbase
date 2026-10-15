@@ -58,7 +58,7 @@ jobs:
         if: env.PATCH == '0'
         run: |
           API="https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/versions"
-          
+
           # For minor releases, rename and deactivate the outgoing major version
           if [[ $IS_MINOR == true ]] && curl -sf -H "Authorization: Token $RTD_TOKEN" "$API/$MAJOR/" >/dev/null; then
             PREV_MINOR=$((MINOR - 1))
@@ -67,7 +67,7 @@ jobs:
               -d "{\"slug\": \"$MAJOR.$PREV_MINOR\", \"active\": false}" \
               "$API/$MAJOR/"
           fi
-          
+
           # Update new version slug to major and activate
           curl -fsS --retry 10 --retry-delay 6 --retry-all-errors -X PATCH \
             -H "Authorization: Token $RTD_TOKEN" -H "Content-Type: application/json" \
@@ -90,6 +90,6 @@ jobs:
               -d "{\"from_url\": \"/$1/*\", \"to_url\": \"/$MAJOR/:splat\", \"type\": \"exact\", \"force\": true}" \
               "https://app.readthedocs.com/api/v3/projects/$RTD_PROJECT/redirects/"
           }
-          
+
           [[ $PATCH == 0 ]] && create_redirect "$MAJOR.$MINOR"
           create_redirect "$MAJOR.$MINOR.$PATCH"
