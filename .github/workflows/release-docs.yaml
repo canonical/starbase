@@ -32,13 +32,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           BRANCH="hotfix/$MAJOR.$MINOR"
-          SHA="${{ github.sha }}"
-          curl -sfX POST -H "Authorization: Token $GH_TOKEN" -H "Content-Type: application/json" \
-            -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"$SHA\"}" \
-            "https://api.github.com/repos/${{ github.repository }}/git/refs" 2>/dev/null || \
-          curl -sfX PATCH -H "Authorization: Token $GH_TOKEN" -H "Content-Type: application/json" \
-            -d "{\"sha\":\"$SHA\",\"force\":true}" \
-            "https://api.github.com/repos/${{ github.repository }}/git/refs/heads/$BRANCH"
+          API="https://api.github.com/repos/${{ github.repository }}"
+
+          if ! curl -sf -H "Authorization: Token $GH_TOKEN" "$API/git/refs/heads/$BRANCH" >/dev/null; then
+            curl -fX POST -H "Authorization: Token $GH_TOKEN" -H "Content-Type: application/json" \
+              -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"${{ github.sha }}\"}" \
+              "$API/git/refs"
+          fi
 
       - name: Sync RTD versions
         if: env.PATCH == '0'
