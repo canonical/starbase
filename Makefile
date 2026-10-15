@@ -24,6 +24,8 @@ include common.mk
 format: format-ruff format-codespell format-prettier format-shfmt format-tombi format-pre-commit  ## Run all automatic formatters
 
 .PHONY: lint
+# `docs-linkcheck` is a prerequisite here rather than part of `lint-docs` so
+# that CI can give link checking a runner of its own.
 lint: lint-code lint-docs lint-twine lint-uv-lockfile lint-actions docs-linkcheck  ## Run all linters
 
 .PHONY: lint-code
