@@ -96,8 +96,11 @@ make docs
 make lint-docs
 ```
 
-Never run `make -C docs` directly. Always use the top-level `make docs-*` targets,
-which configure the documentation build correctly.
+When running documentation builds or checks yourself, never invoke Make inside
+`docs/` — do not pass `-C docs` to Make and do not run `make` from within the
+`docs/` directory. Always use the top-level documentation targets instead, such
+as `make docs`, `make setup-docs`, `make lint-docs`, `make docs-linkcheck`,
+`make docs-spelling`, or `make docs-woke`.
 
 ## Practices
 
