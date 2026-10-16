@@ -54,6 +54,9 @@ make docs
 make lint-docs
 ```
 
+Never run `make -C docs` directly. Always use the top-level `make docs-*` targets,
+which configure the documentation build correctly.
+
 ## Practices
 
 - Make the smallest safe change necessary to resolve the issue. Avoid unrelated bug

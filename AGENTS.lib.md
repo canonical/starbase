@@ -93,6 +93,9 @@ make docs
 make lint-docs
 ```
 
+Never run `make -C docs` directly. Always use the top-level `make docs-*` targets,
+which configure the documentation build correctly.
+
 ## Practices
 
 - Backward compatibility is a **hard requirement**. Apps using this library must
