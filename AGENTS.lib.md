@@ -93,6 +93,11 @@ make docs
 make lint-docs
 ```
 
+Never invoke Make inside `docs/` (no `make -C docs`, no running `make` from
+within `docs/`). Use the top-level documentation targets instead — see
+`make help`, and prefix `make docs-help` subproject commands with `docs-`
+(e.g. `make docs-linkcheck`).
+
 ## Practices
 
 - Backward compatibility is a **hard requirement**. Apps using this library must

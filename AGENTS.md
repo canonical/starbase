@@ -54,6 +54,11 @@ make docs
 make lint-docs
 ```
 
+Never invoke Make inside `docs/` (no `make -C docs`, no running `make` from
+within `docs/`). Use the top-level documentation targets instead — see
+`make help`, and prefix `make docs-help` subproject commands with `docs-`
+(e.g. `make docs-linkcheck`).
+
 ## Practices
 
 - Make the smallest safe change necessary to resolve the issue. Avoid unrelated bug
