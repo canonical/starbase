@@ -24,7 +24,7 @@ include common.mk
 format: format-ruff format-codespell format-prettier format-shfmt format-tombi format-pre-commit  ## Run all automatic formatters
 
 .PHONY: lint
-lint: lint-code lint-docs lint-twine lint-uv-lockfile lint-actions  ## Run all linters
+lint: lint-code lint-docs lint-twine lint-uv-lockfile lint-actions docs-linkcheck  ## Run all linters
 
 .PHONY: lint-code
 lint-code: lint-ruff lint-ty lint-codespell lint-prettier lint-shfmt lint-shellcheck lint-tombi  ## Run code-specific linters

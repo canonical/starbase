@@ -359,6 +359,17 @@ endif
 	-d line-too-long,missing-underscore-after-hyperlink,missing-space-in-hyperlink
 	$(MAKE) -C docs spelling --no-print-directory
 	$(MAKE) -C docs woke --no-print-directory
+ifneq ($(CI),)
+	@echo ::endgroup::
+endif
+
+# Check for broken links. Separate from `docs-lint` because it hits the network
+# and is slow.
+.PHONY: docs-linkcheck
+docs-linkcheck:  ##- Check for broken links in the documentation
+ifneq ($(CI),)
+	@echo ::group::$@
+endif
 	$(MAKE) -C docs linkcheck --no-print-directory
 ifneq ($(CI),)
 	@echo ::endgroup::
