@@ -99,7 +99,9 @@ make lint-docs
 When running documentation builds or checks yourself, never invoke Make inside
 `docs/` — do not pass `-C docs` to Make and do not run `make` from within the
 `docs/` directory. Always use the top-level documentation targets instead; run
-`make help` to discover them.
+`make help` to discover the main ones, and `make docs-help` to list the docs
+subproject commands, which are available at the top level prefixed with `docs-`
+(e.g. `make docs-linkcheck`).
 
 ## Practices
 
