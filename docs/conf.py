@@ -158,8 +158,10 @@ rediraffe_dir_only = True
 
 # This description is included in llms.txt to provide some initial context for your
 # product docs.
-# TODO: Add a description in the form "This is the documentation for <product name>,
-# <first sentence of home page>".
+# TODO: Reuse the first sentence of your home page (docs/index.rst) here, in the form
+# "This is the documentation for <product name>, <first sentence of home page>".
+# Do not write a second, hand-authored description: it will drift from the home page
+# over time.
 llms_txt_description = textwrap.dedent(
     """\
     This is the documentation for Starbase, a template repository for setting up
