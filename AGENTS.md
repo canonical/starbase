@@ -54,10 +54,13 @@ make docs
 make lint-docs
 ```
 
-Never invoke Make inside `docs/` (no `make -C docs`, no running `make` from
-within `docs/`). Use the top-level documentation targets instead — see
-`make help`, and prefix `make docs-help` subproject commands with `docs-`
-(e.g. `make docs-linkcheck`).
+Never run the docs Makefile directly — no `make -C docs`, no `make` from within
+`docs/`, no equivalent invocation; that bypasses the top-level configuration
+(wrong venv, skipped dependency setup) and there is no supported way to do it.
+Run documentation targets from the repository root as `make docs-<target>`
+(e.g. `make docs-linkcheck`); list available targets with `make docs-help`.
+This rule applies to commands you run yourself; the repo's own Make targets and
+pre-commit hooks invoke the docs Makefile internally, which is correct.
 
 ## Practices
 
