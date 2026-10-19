@@ -54,13 +54,11 @@ make docs
 make lint-docs
 ```
 
-Never run the docs Makefile directly — no `make -C docs`, no `make` from within
-`docs/`, no equivalent invocation; that bypasses the top-level configuration
-(wrong venv, skipped dependency setup) and there is no supported way to do it.
-Run documentation targets from the repository root as `make docs-<target>`
-(e.g. `make docs-linkcheck`); list available targets with `make docs-help`.
-This rule applies to commands you run yourself; the repo's own Make targets and
-pre-commit hooks invoke the docs Makefile internally, which is correct.
+Run documentation targets from the repository root using `make docs-<target>`;
+never invoke the docs Makefile directly, with `make -C`, or equivalent, as it
+bypasses required configuration. Use `make docs-help` to list targets. This
+applies only to commands you run directly, not those triggered via repo
+tooling.
 
 ## Practices
 
