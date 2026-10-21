@@ -8,7 +8,7 @@ on:
 
 jobs:
   docs-release:
-    runs-on: [self-hosted]
+    runs-on: [self-hosted, medium, linux, amd64]
     permissions:
       contents: write
     env:
