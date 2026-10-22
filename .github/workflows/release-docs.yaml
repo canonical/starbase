@@ -1,5 +1,4 @@
 name: Documentation release
-
 on:
   push:
     tags:
