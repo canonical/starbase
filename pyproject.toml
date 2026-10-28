@@ -330,3 +330,11 @@ constraint-dependencies = [
   "webencodings>=0.4.0",
   "wheel>=0.38",
 ]
+
+[[tool.uv.index]]
+name = "python-apt-wheels"
+url = "https://lengau.github.io/python-apt-wheels/simple/"
+explicit = true
+
+[tool.uv.sources]
+python-apt = { index = "python-apt-wheels" }
