@@ -20,6 +20,10 @@ repos:
         args: [--fix, --exit-non-zero-on-fix]
       # Run the formatter
       - id: ruff-format
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: "v0.0.96"
+    hooks:
+      - id: ty
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: "" # Intentionally blank, despite the warning.
     hooks:
