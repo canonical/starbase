@@ -287,6 +287,13 @@ intersphinx_mapping = {
 # words, only :external+<project>... will search in other projects.
 intersphinx_disabled_reftypes = ["std:*"]
 
+# Exclude externally included docs from git-last-updated checks.
+# Applications and libraries should fill these in based on which common items they use.
+git_exclude_patterns = [
+    # Exclude "common" brought from other repositories, for example:
+    # "common/craft-parts/**",
+]
+
 
 ##############################
 # Custom Craft configuration #
