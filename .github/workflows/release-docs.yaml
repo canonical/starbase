@@ -13,6 +13,6 @@ jobs:
     uses: canonical/starflow/.github/workflows/release-docs.yaml@main
     with:
       # TODO: set to your Read the Docs project slug.
-      rtd-project: starbase
+      rtd-project: canonical-starbase
     secrets:
       RTD_TOKEN: ${{ secrets.RTD_TOKEN }}
