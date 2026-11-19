@@ -25,8 +25,7 @@ PRETTIER_FILES="**/*.{yaml,yml,json,json5,css,md}"
 # Cutoff (in seconds) before a test is considered slow by pytest
 SLOW_CUTOFF_TIME ?= 1
 
-# Where 'make test-coverage' writes the pytest JUnit XML report. Override to
-# keep reports from concurrent runs (e.g. one per Python version) distinct.
+# Where 'make test-coverage' writes the pytest JUnit XML report.
 JUNIT_XML ?= results/junit.xml
 
 # By default we should not update the uv lock file here.
