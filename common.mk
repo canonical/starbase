@@ -347,9 +347,11 @@ ifneq ($(CI),)
 	@echo ::endgroup::
 endif
 
-# Run our own docs linting, then pass to the docs
+# Run our own docs linting, then pass to the docs. Prettier runs here too:
+# docs-only CI runs docs-lint without lint-code, and Markdown files such as
+# the README still need Prettier.
 .PHONY: docs-lint
-docs-lint:  ##- Lint the documentation
+docs-lint: lint-prettier  ##- Lint the documentation
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
