@@ -114,7 +114,7 @@ jobs:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           STARBASE_SHA: ${{ needs.check-starbase.outputs.starbase_sha }}
         run: |
-          PROMPT=$(cat <<EOF
+          BODY=$(cat <<EOF
           Sync \`canonical/starbase\` \`main\` (latest commit: \`${STARBASE_SHA}\`) into \`${GH_REPO}\`.
 
           Use the \`update-starbase\` skill (available at \`.github/skills/update-starbase/SKILL.md\` or https://github.com/canonical/copilot-collections/tree/main/groups/starcraft/skills/update-starbase).
@@ -126,10 +126,22 @@ jobs:
           4. Keep the PR in draft for human promotion.
           EOF
           )
-          gh api \
+          jq -n \
+            --arg title "chore: update starbase" \
+            --arg body "$BODY" \
+            --arg repo "$GH_REPO" \
+            --arg base "$DEFAULT_BRANCH" \
+            '{
+              title: $title,
+              body: $body,
+              assignees: ["copilot-swe-agent[bot]"],
+              agent_assignment: {
+                target_repo: $repo,
+                base_branch: $base
+              }
+            }' | gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "/agents/repos/${GH_REPO}/tasks" \
-            -f prompt="$PROMPT" \
-            -f base_ref="$DEFAULT_BRANCH"
+            "/repos/${GH_REPO}/issues" \
+            --input -
